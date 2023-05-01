@@ -1,4 +1,4 @@
-# Learn Vocabularies form Lyrics
+# Learn Vocabulary from Lyrics
 
 ## サイト概要
 ### サイトテーマ
