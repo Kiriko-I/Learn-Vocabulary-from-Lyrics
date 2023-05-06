@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  #使用しないdeviseのルーティングをスキップ
+  # 使用しないdeviseのルーティングをスキップ
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
