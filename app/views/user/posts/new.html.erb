@@ -1,7 +1,7 @@
 <h1>投稿場所はどんなようす？</h1>
 <form>
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3 mb-3">
       <label for="prefecture" class="form-label">投稿する都道府県名</label>
       <select class="form-select" aria-label="prefecture" id="prefecture">
         <option selected>Default</option>
@@ -10,41 +10,49 @@
         <option value="3">Three</option>
       </select>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 mb-3">
       <label for="city" class="form-label">投稿する市区町村名</label>
       <input type="string" class="form-control" id="city" placeholder="○○市○○区">
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 mb-3">
       <label for="landmark" class="form-label">近くの目印になる建物</label>
       <input type="string" class="form-control" id="landmark" placeholder="スーパーやバス停など">
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 mb-3">
       <label for="snow_image" class="form-label">積もり具合が分かる写真</label>
       <input class="form-control" type="file" id="snow_image">
     </div>
   </div>
-  <label for="sidewalk" class="form-label">歩道のようす</label>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="sidewalk" id="sidewalk">
-    <label class="form-check-label" for="sidewalk">
-      Default radio
-    </label>
+  <div class="row">
+    <div class="col-lg-3 mb-3">
+      <label for="sidewalk" class="form-label">歩道のようす</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="sidewalk" id="sidewalk">
+        <label class="form-check-label" for="sidewalk">
+          Default radio
+        </label>
+      </div>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="snow_height" class="form-label">積雪の高さ</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="snow_height" id="snow_height" checked>
+        <label class="form-check-label" for="snow_height">
+          Default checked radio
+        </label>
+      </div>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="snow_state" class="form-label">雪のようす</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="snow_state" id="snow_state" checked>
+        <label class="form-check-label" for="snow_state">
+          Default checked radio
+        </label>
+      </div>
+    </div>
   </div>
-  <label for="snow_height" class="form-label">積雪の高さ</label>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="snow_height" id="snow_height" checked>
-    <label class="form-check-label" for="snow_height">
-      Default checked radio
-    </label>
-  </div>
-  <label for="snow_state" class="form-label">雪のようす</label>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="snow_state" id="snow_state" checked>
-    <label class="form-check-label" for="snow_state">
-      Default checked radio
-    </label>
-  </div>
-  <div class="mb-3">
+  <div class="mb-3 mb-3">
     <label for="message" class="form-label">メッセージ</label>
     <textarea class="form-control" id="message"  placeholder="励ましの言葉やアドバイスなどご自由にどうぞ" rows="2"></textarea>
   </div>

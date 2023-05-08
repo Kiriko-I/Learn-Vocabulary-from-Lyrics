@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "user/registrations",
+    sessions: 'user/sessions'
+  }
   namespace :admin do
     root to: 'homes#top'
     get 'users_search' => 'searches#users_search'
@@ -11,10 +15,6 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy]
   end
 
-  devise_for :users, skip: [:passwords], controllers: {
-    registrations: "user/registrations",
-    sessions: 'user/sessions'
-  }
   # ユーザーログイン画面をルートパスにする
   # scope module: :users do
   #   root 'sessions#new'
