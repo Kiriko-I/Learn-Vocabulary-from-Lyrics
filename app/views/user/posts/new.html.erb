@@ -1,59 +1,50 @@
 <h1>投稿場所はどんなようす？</h1>
 
-<div class="row">
-  <div class="col-lg-3 mb-3">
-    <label for="prefecture" class="form-label">投稿する都道府県名</label>
-    <select class="form-select" aria-label="prefecture" id="prefecture">
-      <option selected>Default</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <div class="col-lg-3 mb-3">
-    <label for="city" class="form-label">投稿する市区町村名</label>
-    <input type="string" class="form-control" id="city" placeholder="○○市○○区">
-  </div>
-  <div class="col-lg-3 mb-3">
-    <label for="landmark" class="form-label">近くの目印になる建物</label>
-    <input type="string" class="form-control" id="landmark" placeholder="スーパーやバス停など">
-  </div>
-  <div class="col-lg-3 mb-3">
-    <label for="snow_image" class="form-label">積もり具合が分かる写真</label>
-    <input class="form-control" type="file" id="snow_image">
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-3 mb-3">
-    <label for="sidewalk" class="form-label">歩道のようす</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="sidewalk" id="sidewalk">
-      <label class="form-check-label" for="sidewalk">
-        Default radio
-      </label>
+<%= form_with model: @post, local: true do |f| %>
+  <div class="row">
+    <div class="col-lg-3 mb-3">
+      <label for="prefecture" class="form-label">投稿する都道府県名</label>
+      <%= f.select :prefecture, User.prefecture_methods.keys, {}, class: "form-select", id: "prefecture" %>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="city" class="form-label">投稿する市区町村名</label>
+      <%= f.text_field :city, placeholder: "○○市○○区", class: "form-control", id: "city" %>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="landmark" class="form-label">近くの目印になる建物</label>
+      <%= f.text_field :landmark, placeholder: "スーパーやバス停など", class: "form-control", id: "landmark" %>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="snow_image" class="form-label">積もり具合が分かる写真</label>
+      <%= f.file_field :snow_image, class: "input-group", accept: 'image/*', id:"snow_image" %>
     </div>
   </div>
-  <div class="col-lg-3 mb-3">
-    <label for="snow_height" class="form-label">積雪の高さ</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="snow_height" id="snow_height" checked>
-      <label class="form-check-label" for="snow_height">
-        Default checked radio
-      </label>
+  <div class="row">
+    <div class="col-lg-3 mb-3">
+      <label for="sidewalk" class="form-label">歩道のようす</label>
+      <div class="form-check">
+        <%= f.collection_radio_buttons :sidewalk, Post.sidewalk_methods, :first, :last %>
+      </div>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="snow_height" class="form-label">積雪の高さ</label>
+      <div class="form-check">
+        <!--<input class="form-check-input" type="radio" name="snow_height" id="snow_height" checked>-->
+        <!--<label class="form-check-label" for="snow_height">-->
+        <!--</label>-->
+        <%= f.collection_radio_buttons :snow_height, Post.snow_height_methods, :first, :last %>
+      </div>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <label for="snow_state" class="form-label">雪のようす</label>
+      <div class="form-check">
+        <%= f.collection_radio_buttons :snow_state, Post.snow_state_methods, :first, :last %>
+      </div>
     </div>
   </div>
-  <div class="col-lg-3 mb-3">
-    <label for="snow_state" class="form-label">雪のようす</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="snow_state" id="snow_state" checked>
-      <label class="form-check-label" for="snow_state">
-        Default checked radio
-      </label>
-    </div>
+  <div class="mb-3 mb-3">
+    <label for="message" class="form-label">メッセージ(70字以内)</label>
+    <%= f.text_area :message, placeholder: "励ましの言葉やアドバイスなどご自由にどうぞ", class: "form-control", id: "message" %>
   </div>
-</div>
-<div class="mb-3 mb-3">
-  <label for="message" class="form-label">メッセージ</label>
-  <textarea class="form-control" id="message"  placeholder="励ましの言葉やアドバイスなどご自由にどうぞ" rows="2"></textarea>
-</div>
-<button type="submit" class="btn btn-primary">Submit</button>
+  <%= f.submit "投稿する", class: "btn btn-primary" %>
+<% end %>
