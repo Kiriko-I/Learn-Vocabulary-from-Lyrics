@@ -7,7 +7,7 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(params[:sort])
+    @posts = Post.all.order(created_at: :desc)
   end
   
   def new
@@ -18,7 +18,6 @@ class User::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      @post.save_tags(tag_list)
       redirect_to post_path(@post), notice: "You have created new post successfully."
     else
       @posts = Post.all

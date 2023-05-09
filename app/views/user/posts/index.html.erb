@@ -1,0 +1,31 @@
+<h1>地域の投稿一覧</h1>
+
+<div class="row row-cols-1 row-cols-lg-4 g-4">
+  <% @posts.each do |post| %>
+    <div class="col">
+      <div class="card h-100 border-secondary mb-3">
+        <div class="card-header bg-transparent border-secondary">
+          <% if post.user.profile_image.exist?  %>
+            <%= image_tag post.user.profile_image, size:'10x10' %>
+          <% else %>
+            <i class="fa-solid fa-snowman fa-2xl"></i>
+          <% end %>
+          <%= post.user.nickname %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= post.city %></h5>
+          <p class="card-text">
+            近くの建物：<%= post.landmark %><br>
+            歩道のようす：<%= post.sidewalk %><br>
+            積雪の高さ：<%= post.snow_height %><br>
+            雪のようす：<%= post.snow_state %><br>
+            メッセージ：<%= post.message %>
+          </p>
+        </div>
+        <div class="card-footer bg-transparent border-secondary">
+          <small class="text-muted"><%= post.created_at %></small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
