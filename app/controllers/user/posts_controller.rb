@@ -3,7 +3,7 @@ class User::PostsController < ApplicationController
   # before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]).order(created_at: :desc)
   end
 
   def index
@@ -18,7 +18,7 @@ class User::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to post_path(@post), notice: "You have created new post successfully."
+      redirect_to post_path(@post), notice: "投稿しました。"
     else
       @posts = Post.all
       render 'index'
@@ -32,8 +32,9 @@ class User::PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     if post.update(post_params)
-      redirect_to post_path(post), notice: "You have updated post successfully."
+      redirect_to post_path(post), notice: "投稿を更新しました。"
     else
+      @post = Post.find(params[:id])
       render "edit"
     end
   end
