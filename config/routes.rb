@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/' => 'user/sessions#new', as: 'new_user_session'
     post 'user/sign_in' => 'user/sessions#create', as: 'user_session'
     delete 'user/sign_out' => 'user/sessions#destroy', as: 'destroy_user_session'
+    post 'user/guest_sign_in', to: 'user/sessions#guest_sign_in'
   end
   
   namespace :admin do

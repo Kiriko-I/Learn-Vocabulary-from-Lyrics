@@ -18,17 +18,22 @@
       <label for="password" class="form-label">パスワード</label>
       <%= f.password_field :password, class: "form-control", id: "password" %>
     </div>
-  
+
     <!--<% if devise_mapping.rememberable? %>-->
     <!--  <div class="col-7 mb-3">-->
     <!--    <%= f.check_box :remember_me %>-->
     <!--    <%= f.label :remember_me %>-->
     <!--  </div>-->
     <!--<% end %>-->
-  
+
     <div class="col-7 mb-3">
       <%= f.submit "ログイン", class: "btn btn-info" %>
     </div>
   <% end %>
+
+  <div class="col-7 mb-3">
+    <%= link_to 'ゲストログイン（閲覧用）', user_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
+  </div>
+
   <%= render "user/shared/links" %>
 </div>
