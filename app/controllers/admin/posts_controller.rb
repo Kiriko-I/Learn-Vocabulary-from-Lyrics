@@ -9,8 +9,9 @@ class Admin::PostsController < ApplicationController
   end
   
   def destroy
-    @post.destroy
-    redirect_to posts_path
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to admin_posts_path
   end
 
   private

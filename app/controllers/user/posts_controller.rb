@@ -9,7 +9,7 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :desc)
   end
-  
+
   def new
     @post = Post.new
   end
@@ -26,25 +26,28 @@ class User::PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def update
-    if @post.update(post_params)
-      redirect_to post_path(@post), notice: "You have updated post successfully."
+    post = Post.find(params[:id])
+    if post.update(post_params)
+      redirect_to post_path(post), notice: "You have updated post successfully."
     else
       render "edit"
     end
   end
 
   def destroy
-    @post.destroy
+    post = Post.find(params[:id])
+    post.destroy
     redirect_to posts_path
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_state, :message)
+    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message)
   end
 
   # def ensure_correct_user
