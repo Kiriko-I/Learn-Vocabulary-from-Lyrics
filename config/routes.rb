@@ -3,10 +3,16 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  devise_for :users, skip: [:passwords], controllers: {
+  devise_for :user, skip: [:sessions, :passwords], controllers: {
     registrations: "user/registrations",
-    sessions: 'user/sessions'
+    # sessions: 'user/sessions'
   }
+  devise_scope :user do
+    get '/' => 'user/sessions#new', as: 'new_user_session'
+    post 'user/sign_in' => 'user/sessions#create', as: 'user_session'
+    delete 'user/sign_out' => 'user/sessions#destroy', as: 'destroy_user_session'
+  end
+  
   namespace :admin do
     root to: 'homes#top'
     get 'users_search' => 'searches#users_search'

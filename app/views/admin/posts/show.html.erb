@@ -1,0 +1,38 @@
+<h1>投稿詳細</h1>
+
+<div class="row">
+    <div class="col">
+      <div class="card h-100 border-secondary">
+        <div class="card-header bg-transparent border-secondary">
+          <% if @post.user.profile_image.exist? %>
+            <%= image_tag @post.user.profile_image, size:'10x10' %>
+          <% else %>
+            <i class="fa-solid fa-snowman fa-2xl"></i>
+          <% end %>
+          <%= @post.user.nickname %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @post.city %></h5>
+          <p class="card-text">
+            近くの建物：<%= @post.landmark %><br>
+            歩道のようす：<%= @post.sidewalk %><br>
+            積雪の高さ：<%= @post.snow_height %><br>
+            雪のようす：<%= @post.snow_state %><br>
+            メッセージ：<%= @post.message %>
+          </p>
+          <% if @post.user == current_user %>
+            <%= link_to edit_post_path(@post.id), class: "btn btn-secondary" do %>
+              <i class="fa-solid fa-pen-to-square"></i> 編集する
+            <% end %>
+          <% elsif admin_signed_in? %>
+            <%= link_to admin_post_path(@post.id), class: "btn btn-danger" do %>
+              <i class="fa-solid fa-trash"></i> 削除する
+            <% end %>
+          <% end %>
+        </div>
+        <div class="card-footer bg-transparent border-secondary">
+          <small class="text-muted">投稿日時：<%= @post.created_at %></small>
+        </div>
+      </div>
+    </div>
+</div>

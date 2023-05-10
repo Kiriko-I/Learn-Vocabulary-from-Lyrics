@@ -1,9 +1,9 @@
 <div class="row row-cols-1 row-cols-lg-4 g-4">
   <% posts.each do |post| %>
     <div class="col">
-      <div class="card h-100 border-secondary mb-3">
+      <div class="card h-100 border-secondary">
         <div class="card-header bg-transparent border-secondary">
-          <% if post.user.profile_image.exist?  %>
+          <% if post.user.profile_image.exist? %>
             <%= image_tag post.user.profile_image, size:'10x10' %>
           <% else %>
             <i class="fa-solid fa-snowman fa-2xl"></i>
@@ -19,9 +19,18 @@
             雪のようす：<%= post.snow_state %><br>
             メッセージ：<%= post.message %>
           </p>
+          <% if user_signed_in? %>
+            <%= link_to post_path(post.id), class: "btn btn-secondary" do %>
+              <i class="fa-solid fa-eye"></i> 詳しく見る
+            <% end %>
+          <% elsif admin_signed_in? %>
+            <%= link_to admin_post_path(post.id), class: "btn btn-secondary" do %>
+              <i class="fa-solid fa-eye"></i> 詳しく見る
+            <% end %>
+          <% end %>
         </div>
         <div class="card-footer bg-transparent border-secondary">
-          <small class="text-muted"><%= post.created_at %></small>
+          <small class="text-muted">投稿日時：<%= post.created_at %></small>
         </div>
       </div>
     </div>
