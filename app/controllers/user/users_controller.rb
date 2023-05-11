@@ -5,7 +5,7 @@ class User::UsersController < ApplicationController
   def mypage
     @user = current_user
   end
-  
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
@@ -14,7 +14,7 @@ class User::UsersController < ApplicationController
   def edit
     @user = current_user
   end
-  
+
   def update
     user = current_user
     if user.update(user_params)
@@ -24,25 +24,25 @@ class User::UsersController < ApplicationController
       render 'edit'
     end
   end
-      
+
   def destroy
     user = User.find(params[:id])
     user.destroy
     redirect_to admin_users_path
   end
-  
+
   private
-  
+
   def user_params
-    params.require(:user).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message)
+    params.require(:user).permit(:nickname, :prefecture)
   end
 
   def ensure_guest_user
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.name == "guestuser"
       @user = current_user
       redirect_to mypage_path, notice: 'ゲストはプロフィール編集画面へ遷移できません。'
     end
-  end    
+  end
 
 end
