@@ -3,7 +3,7 @@ class User::PostsController < ApplicationController
   # before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
-    @post = Post.find(params[:id]).order(created_at: :desc)
+    @post = Post.find(params[:id])
   end
 
   def index

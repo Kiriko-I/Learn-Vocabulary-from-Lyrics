@@ -1,7 +1,7 @@
 class Admin::PostsController < ApplicationController
 
   def show
-    @post = Post.find(params[:id]).order(created_at: :desc)
+    @post = Post.find(params[:id])
   end
 
   def index

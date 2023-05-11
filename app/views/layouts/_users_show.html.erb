@@ -1,15 +1,29 @@
+<div class="row row-cols-1 g-4 mb-3">
+  <div class="col">
+    <div class="card h-100 border-secondary">
+      <div class="card-body">
+        <h5 class="card-title mb-3">
+          <% if user.profile_image.exist? %>
+            <%= image_tag user.profile_image, size:'10x10' %>
+          <% else %>
+            <i class="fa-solid fa-snowman fa-2xl"></i>
+          <% end %>
+          <%= user.nickname %>
+          <%= user.prefecture %>
+        </h5>
+        <% if admin_signed_in? && user.id != 1 %>
+          <%= link_to admin_user_path(user.id), method: :delete, class: "btn btn-danger" do %>
+            <i class="fa-solid fa-trash"></i> ユーザーを削除する
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row row-cols-1 row-cols-lg-4 g-4">
   <% posts.each do |post| %>
     <div class="col">
       <div class="card h-100 border-secondary">
-        <div class="card-header bg-transparent border-secondary">
-          <% if post.user.profile_image.exist? %>
-            <%= image_tag post.user.profile_image, size:'10x10' %>
-          <% else %>
-            <i class="fa-solid fa-snowman fa-2xl"></i>
-          <% end %>
-          <%= post.user.nickname %>
-        </div>
         <div class="card-body">
           <h5 class="card-title"><%= post.city %></h5>
           <p class="card-text">
