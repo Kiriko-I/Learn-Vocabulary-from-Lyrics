@@ -26,9 +26,11 @@
             <%= link_to post_path(post.id), class: "btn btn-secondary" do %>
               <i class="fa-solid fa-eye"></i> 詳しく見る
             <% end %>
-            <div id="favorite-<%= post.id %>">
-              <%= render 'user/favorites/btn', post: post %>
-            </div>
+            <% if current_user.id != 1 %>
+              <div id="favorite-<%= post.id %>">
+                <%= render 'user/favorites/btn', post: post %>
+              </div>
+            <% end %>
           <% end %>
         </div>
         <div class="card-footer bg-transparent border-secondary">

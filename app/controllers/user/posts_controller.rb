@@ -1,6 +1,6 @@
 class User::PostsController < ApplicationController
-  # before_action :authenticate_user!
-  # before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
     @post = Post.find(params[:id])
@@ -51,10 +51,10 @@ class User::PostsController < ApplicationController
     params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message)
   end
 
-  # def ensure_correct_user
-  #   @post = post.find(params[:id])
-  #   unless @post.user == current_user
-  #     redirect_to posts_path
-  #   end
-  # end
+  def ensure_correct_user
+    @post = post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to posts_path
+    end
+  end
 end

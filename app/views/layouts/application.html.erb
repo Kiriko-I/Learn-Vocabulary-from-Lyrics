@@ -30,7 +30,7 @@
                 <li class="nav-item me-2">
                   <%= link_to admin_posts_path, class: "nav-link" do %>
                     <i class="fa-solid fa-shoe-prints fa-xl"></i> 投稿一覧
-                  <% end %>                    
+                  <% end %>
                 </li>
                 <li class="nav-item me-2">
                   <div class="input-group">
@@ -86,8 +86,10 @@
                   </div>
                 </li>
               </ul>
-              <%= link_to mypage_path, class: "btn btn-outline-info ms-2" do %>
-                <i class="fa-solid fa-user-gear fa-xl"></i> マイページ
+              <% if current_user.id != 1 %>
+                <%= link_to mypage_path, class: "btn btn-outline-info ms-2" do %>
+                  <i class="fa-solid fa-user-gear fa-xl"></i> マイページ
+                <% end %>
               <% end %>
               <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-warning ms-2" do %>
                 <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i> ログアウト

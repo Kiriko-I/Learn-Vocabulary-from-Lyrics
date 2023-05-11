@@ -1,6 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_guest_user, only: [:mypage, :edit]
 
   def mypage
     @user = current_user
@@ -41,7 +41,7 @@ class User::UsersController < ApplicationController
     @user = current_user
     if @user.name == "guestuser"
       @user = current_user
-      redirect_to mypage_path, notice: 'ゲストはプロフィール編集画面へ遷移できません。'
+      redirect_to posts_path, notice: 'ゲストはプロフィール画面へ遷移できません。'
     end
   end
 

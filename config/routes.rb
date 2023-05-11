@@ -22,13 +22,10 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy]
   end
 
-  # ユーザーログイン画面をルートパスにする
-  # scope module: :users do
-  #   root 'sessions#new'
-  # end
   scope module: :user do
     get 'users_search' => 'searches#users_search'
     get 'posts_search' => 'searches#posts_search'
+    get 'posts/favorites' => 'favorites#index'
     get 'users/mypage' => 'users#mypage', as: 'mypage'
     get 'users/information/edit' => 'users#edit', as: 'edit_information'
     patch 'users/information' => 'users#update', as: 'update_information'
@@ -39,7 +36,7 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
     resources :posts do
       resources :comments, only: [:create, :destroy]
-      resource :favorites, only: [:index, :create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
   end
 

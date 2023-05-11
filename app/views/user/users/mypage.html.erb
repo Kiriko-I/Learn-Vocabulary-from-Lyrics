@@ -19,7 +19,7 @@
         <%= link_to show_user_path(@user.id), class: "btn btn-secondary" do %>
           <i class="fa-solid fa-list"></i> 投稿履歴
         <% end %>
-        <%= link_to destroy_information_path, class: "btn btn-secondary" do %>
+        <%= link_to posts_favorites_path, class: "btn btn-secondary" do %>
           <i class="fa-solid fa-bookmark"></i> しおり一覧
         <% end %>
         <%= link_to followings_path, class: "btn btn-secondary" do %>
