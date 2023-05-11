@@ -18,12 +18,17 @@
             雪のようす：<%= post.snow_state %><br>
             メッセージ：<%= post.message %>
           </p>
-          <% if post.user == current_user %>
-            <%= link_to edit_post_path(post.id), class: "btn btn-secondary" do %>
-              <i class="fa-solid fa-pen-to-square"></i> 編集する
-            <% end %>
-            <%= link_to post_path(post.id), method: :delete, class: "btn btn-danger" do %>
-              <i class="fa-solid fa-trash"></i> 削除する
+          <% if user_signed_in? %>
+            <p id="favorite-<%= post.id %>">
+              <%= render 'user/favorites/btn', post: post %>
+            </p>
+            <% if post.user == current_user %>
+              <%= link_to edit_post_path(post.id), class: "btn btn-secondary" do %>
+                <i class="fa-solid fa-pen-to-square"></i> 編集する
+              <% end %>
+              <%= link_to post_path(post.id), method: :delete, class: "btn btn-danger" do %>
+                <i class="fa-solid fa-trash"></i> 削除する
+              <% end %>
             <% end %>
           <% elsif admin_signed_in? %>
             <%= link_to admin_post_path(post.id), method: :delete, class: "btn btn-danger" do %>

@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-lg-3 mb-3">
       <label for="prefecture" class="form-label">投稿する都道府県名</label>
-      <%= f.select :prefecture, User.prefecture_methods.keys, {}, class: "form-select", id: "prefecture" %>
+      <%= f.select :prefecture, User.prefecture_methods.values.map { |k| [k, k]}, {}, class: "form-select", id: "prefecture" %>
+      <!--<%= f.select :prefecture, User.prefecture_methods.values.to_a, {}, class: "form-select", id: "prefecture" %>-->
     </div>
     <div class="col-lg-3 mb-3">
       <label for="city" class="form-label">投稿する市区町村名</label>

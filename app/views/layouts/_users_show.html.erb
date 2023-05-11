@@ -30,8 +30,7 @@
             近くの建物：<%= post.landmark %><br>
             歩道のようす：<%= post.sidewalk %><br>
             積雪の高さ：<%= post.snow_height %><br>
-            雪のようす：<%= post.snow_state %><br>
-            メッセージ：<%= post.message %>
+            雪のようす：<%= post.snow_state %>
           </p>
           <% if admin_signed_in? %>
             <%= link_to admin_post_path(post.id), class: "btn btn-secondary" do %>
