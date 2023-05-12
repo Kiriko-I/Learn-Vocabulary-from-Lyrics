@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     delete 'user/sign_out' => 'user/sessions#destroy', as: 'destroy_user_session'
     post 'user/guest_sign_in', to: 'user/sessions#guest_sign_in'
   end
-  
+
   namespace :admin do
     root to: 'homes#top'
     get 'users_search' => 'searches#users_search'
@@ -31,9 +31,10 @@ Rails.application.routes.draw do
     patch 'users/information' => 'users#update', as: 'update_information'
     delete 'users/information' => 'users#destroy', as: 'destroy_information'
     get 'users/:id' => 'users#show', as: 'show_user'
-    resource :relationships, only: [:create, :destroy]
-    get 'followings' => 'relationships#followings', as: 'followings'
-    get 'followers' => 'relationships#followers', as: 'followers'
+    post 'relationships/:id' => 'relationships#create', as: 'create_relationship'
+    delete 'relationships/:id' => 'relationships#destroy', as: 'destroy_relationship'
+    get 'followings/:id' => 'relationships#followings', as: 'followings'
+    get 'followers/:id' => 'relationships#followers', as: 'followers'
     resources :posts do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]

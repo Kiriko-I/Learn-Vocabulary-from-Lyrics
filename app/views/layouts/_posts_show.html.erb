@@ -2,23 +2,29 @@
     <div class="col">
       <div class="card border-secondary">
         <div class="card-header bg-transparent border-secondary">
-          <% if post.user.profile_image.exist? %>
-            <%= image_tag post.user.profile_image, size:'10x10' %>
-          <% else %>
-            <i class="fa-solid fa-snowman fa-2xl"></i>
+          <%= link_to show_user_path(post.user.id), class: "text-decoration-none" do %>
+            <% if post.user.profile_image.exist? %>
+              <%= image_tag post.user.profile_image, size:'10x10', class: "rounded-circle" %>
+            <% else %>
+              <i class="fa-solid fa-snowman fa-2xl"></i>
+            <% end %>
+            <%= post.user.nickname %>
           <% end %>
-          <%= post.user.nickname %>
         </div>
         <div class="card-body">
           <div class="row g-0">
             <div class="col-8">
               <h5 class="card-title"><%= post.city %></h5>
               <p class="card-text">
-                近くの建物：<%= post.landmark %><br>
+                <% if post.landmark.present? %>
+                  近くの建物：<%= post.landmark %><br>
+                <% end %>
                 歩道のようす：<%= post.sidewalk %><br>
                 積雪の高さ：<%= post.snow_height %><br>
                 雪のようす：<%= post.snow_state %><br>
-                メッセージ：<%= post.message %>
+                <% if post.message.present? %>
+                  メッセージ：<%= post.message %>
+                <% end %>
               </p>
               <% if user_signed_in? %>
                 <% if current_user.id != 1 %>
@@ -41,7 +47,11 @@
               <% end %>
             </div>
             <div class="col-4">
-              <%= image_tag post.snow_image, class: "card-img" %>
+              <% if post.snow_image.present? %>
+                <%= image_tag post.snow_image, class: "card-img" %>
+              <% else %>
+                <p class="text-secondary mt-5">写真はありません</p>
+              <% end %>
             </div>
           </div>
         </div>

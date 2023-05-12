@@ -22,7 +22,7 @@
         <%= link_to posts_favorites_path, class: "btn btn-secondary" do %>
           <i class="fa-solid fa-bookmark"></i> しおり一覧
         <% end %>
-        <%= link_to followings_path, class: "btn btn-secondary" do %>
+        <%= link_to followings_path(@user.id), class: "btn btn-secondary" do %>
           <i class="fa-solid fa-star"></i> フォロー一覧
         <% end %>
         <%= link_to destroy_information_path, method: :delete, class: "btn btn-danger" do %>

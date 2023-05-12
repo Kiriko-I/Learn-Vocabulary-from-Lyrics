@@ -3,17 +3,21 @@
     <div class="col">
       <div class="card h-100 border-secondary">
         <div class="card-header bg-transparent border-secondary">
-          <% if post.user.profile_image.exist? %>
-            <%= image_tag post.user.profile_image, size:'10x10' %>
-          <% else %>
-            <i class="fa-solid fa-snowman fa-2xl"></i>
+          <%= link_to show_user_path(post.user.id), class: "text-decoration-none" do %>
+            <% if post.user.profile_image.exist? %>
+              <%= image_tag post.user.profile_image, size:'10x10', class: "rounded-circle" %>
+            <% else %>
+              <i class="fa-solid fa-snowman fa-2xl"></i>
+            <% end %>
+            <%= post.user.nickname %>
           <% end %>
-          <%= post.user.nickname %>
         </div>
         <div class="card-body">
           <h5 class="card-title"><%= post.city %></h5>
           <p class="card-text">
-            近くの建物：<%= post.landmark %><br>
+            <% if post.landmark.present? %>
+              近くの建物：<%= post.landmark %><br>
+            <% end %>
             歩道のようす：<%= post.sidewalk %><br>
             積雪の高さ：<%= post.snow_height %><br>
             雪のようす：<%= post.snow_state %>
