@@ -4,13 +4,13 @@
       <div class="card h-100 border-secondary">
         <div class="card-body">
           <h5 class="card-title">
-            <% if user.profile_image.exist? %>
-              <%= image_tag user.profile_image, size:'10x10', class: "rounded-circle" %>
+            <% if user.profile_image.present? %>
+              <%= image_tag user.profile_image, size:'50x50', class: "rounded-circle" %>
             <% else %>
-              <i class="fa-solid fa-snowman fa-2xl"></i>
+              <i class="fa-solid fa-snowman fa-3x"></i>
             <% end %>
             <%= user.nickname %>
-            <%= user.prefecture %>
+            <%= User.prefecture_methods.keys[user.prefecture] %>
             <% if user_signed_in? && current_user.id != 1 %>
               <%= render 'user/relationships/btn', user: user %>
             <% end %>

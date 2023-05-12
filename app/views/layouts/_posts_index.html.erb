@@ -4,23 +4,23 @@
       <div class="card h-100 border-secondary">
         <div class="card-header bg-transparent border-secondary">
           <%= link_to show_user_path(post.user.id), class: "text-decoration-none" do %>
-            <% if post.user.profile_image.exist? %>
-              <%= image_tag post.user.profile_image, size:'10x10', class: "rounded-circle" %>
+            <% if post.user.profile_image.present? %>
+              <%= image_tag post.user.profile_image, size:'50x50', class: "rounded-circle" %>
             <% else %>
-              <i class="fa-solid fa-snowman fa-2xl"></i>
+              <i class="fa-solid fa-snowman fa-3x"></i>
             <% end %>
             <%= post.user.nickname %>
           <% end %>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><%= post.city %></h5>
+          <h5 class="card-title"><%= User.prefecture_methods.keys[post.prefecture] %> <%= post.city %></h5>
           <p class="card-text">
             <% if post.landmark.present? %>
               近くの建物：<%= post.landmark %><br>
             <% end %>
-            歩道のようす：<%= post.sidewalk %><br>
-            積雪の高さ：<%= post.snow_height %><br>
-            雪のようす：<%= post.snow_state %>
+            歩道のようす：<%= Post.sidewalk_methods.keys[post.sidewalk] %><br>
+            積雪の高さ：<%= Post.snow_height_methods.keys[post.snow_height] %><br>
+            雪のようす：<%= Post.snow_state_methods.keys[post.snow_state] %><br>
           </p>
           <% if admin_signed_in? %>
             <%= link_to admin_post_path(post.id), class: "btn btn-secondary" do %>
@@ -31,7 +31,7 @@
               <i class="fa-solid fa-eye"></i> 詳しく見る
             <% end %>
             <% if current_user.id != 1 %>
-              <div id="favorite-<%= post.id %>">
+              <div id="favorite-<%= post.id %>" class="btn btn-secondary">
                 <%= render 'user/favorites/btn', post: post %>
               </div>
             <% end %>

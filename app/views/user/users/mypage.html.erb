@@ -5,13 +5,13 @@
     <div class="card h-100 border-secondary">
       <div class="card-body">
         <h5 class="card-title mb-3">
-          <% if @user.profile_image.exist? %>
-            <%= image_tag @user.profile_image, size:'10x10' %>
+          <% if @user.profile_image.present? %>
+            <%= image_tag @user.profile_image, size:'50x50', class: "rounded-circle" %>
           <% else %>
-            <i class="fa-solid fa-snowman fa-2xl"></i>
+            <i class="fa-solid fa-snowman fa-3x"></i>
           <% end %>
           <%= @user.nickname %>
-          <%= @user.prefecture %>
+          <%= User.prefecture_methods.keys[@user.prefecture] %>
         </h5>
         <%= link_to edit_information_path, class: "btn btn-info" do %>
           <i class="fa-solid fa-user-pen"></i> ユーザー情報編集
