@@ -3,7 +3,6 @@
     <div class="col-lg-3 mb-3">
       <label for="prefecture" class="form-label">投稿する都道府県名</label>
       <%= f.select :prefecture, User.prefecture_methods.map { |k| [k[0], k[1]] }, {}, class: "form-select", id: "prefecture" %>
-      <!--<%= f.select :prefecture, User.prefecture_methods.values.to_a, {}, class: "form-select", id: "prefecture" %>-->
     </div>
     <div class="col-lg-3 mb-3">
       <label for="city" class="form-label">投稿する市区町村名</label>
@@ -21,29 +20,26 @@
   <div class="row">
     <div class="col-lg-3 mb-3">
       <label for="sidewalk" class="form-label">歩道のようす</label>
-      <div class="form-check">
+      <div class="form-check text-wrap", style="width: 18rem;">
         <%= f.collection_radio_buttons :sidewalk, Post.sidewalk_methods.to_a, :second, :first %>
       </div>
     </div>
     <div class="col-lg-3 mb-3">
       <label for="snow_height" class="form-label">積雪の高さ</label>
-      <div class="form-check">
-        <!--<input class="form-check-input" type="radio" name="snow_height" id="snow_height" checked>-->
-        <!--<label class="form-check-label" for="snow_height">-->
-        <!--</label>-->
+      <div class="form-check", style="width: 10rem;">
         <%= f.collection_radio_buttons :snow_height, Post.snow_height_methods.to_a, :second, :first %>
       </div>
     </div>
     <div class="col-lg-3 mb-3">
       <label for="snow_state" class="form-label">雪のようす</label>
-      <div class="form-check">
+      <div class="form-check", style="width: 10rem;">
         <%= f.collection_radio_buttons :snow_state, Post.snow_state_methods.to_a, :second, :first %>
       </div>
     </div>
   </div>
   <div class="mb-3 mb-3">
     <label for="message" class="form-label">メッセージ(70字以内)</label>
-    <%= f.text_area :message, placeholder: "励ましの言葉やアドバイスなどご自由にどうぞ", class: "form-control", id: "message" %>
+    <%= f.text_area :message, placeholder: "メッセージやアドバイスなどご自由にどうぞ", class: "form-control", id: "message" %>
   </div>
   <%= f.submit "投稿する", class: "btn btn-primary" %>
 <% end %>

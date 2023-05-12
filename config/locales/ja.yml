@@ -1,0 +1,25 @@
+ja:
+  enums:
+    # post:
+    #   sidewalk_method:
+    #     as_usual: "いつもどおり歩ける"
+    #     no_sidewalk: "歩道のない道路だがいつもどおり歩ける"
+    #     two_people: "2人通れる幅がある"
+    #     one_person: "1人しか通れない"
+    #     walk_roadway: "車道を歩くしかない"
+    #     cannnot_walk: "どこも歩けない"
+    #   snow_height_method:
+    #     no_snow: "雪はない"
+    #     sparse_snow: "まばらに雪がある"
+    #     remain_footprints: "足あとが残るくらい"
+    #     buries_shoes: "靴が埋もれるくらい"
+    #     same_as_knees: "ひざ下～ひざ位"
+    #     above_knees: "ひざ上以上"
+    #     cannot_go_outside: "家から出られない"
+    #   snow_state_method:
+    #     nothing: "雪はない"
+    #     powder: "さらさら"
+    #     fluffy: "ふわふわ"
+    #     compacted: "どっしりかたい"
+    #     slippery: "つるつる滑りやすい"
+    #     melting: "溶けてぐちゃぐちゃ"

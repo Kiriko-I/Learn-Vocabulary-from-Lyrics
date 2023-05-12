@@ -6,25 +6,19 @@ class Post < ApplicationRecord
   validates :message, length: { maximum: 70 }
 
   enum sidewalk_method: {
-    as_usual: 0, no_sidewalk: 1, two_people: 2,
-    one_person: 3, walk_roadway: 4, cannot_walk: 5
+    "いつもどおり歩ける　　　　　　　　": 0, "歩道のない道路だがいつもどおり歩ける": 1,
+    "２人通れる幅がある　　　　　　　": 2, "１人しか通れない　　　　　　　　": 3,
+    "車道を歩くしかない　　　　　　　　": 4, "どこも歩けない": 5
   }
-  # as_usual=いつもどおりの歩道, no_sidewalk=歩道のない道路だがいつもどおり歩ける, 
-  # two_people=（雪はあるが）対面通行できる, one_person=一人通れるだけの幅はある,
-  # walk_roadway=歩道が埋まっているので車道を歩く, cannnot_walk=道を歩くことができない
   enum snow_height_method: {
-    no_snow: 0, sparse_snow: 1, remain_footprints: 2,buried_shoes: 3,
-    same_as_knees: 4, above_knees: 5, cannot_go_outside: 6
-  }
-  # no_snow=雪なし, sparse_snow=まばらに雪がある, remain_footprints=足跡が残るくらい,
-  # buries_shoes=靴が埋もれるくらい, same_as_knees=ひざ下～ひざ位, above_knees=ひざ上,
-  # cannot_go_outside=外に出られない
+    "雪はない　　　　": 0, "まばらに雪がある　": 1, "足あとが残るくらい": 2, "靴が埋もれるくらい": 3,
+    "ひざ下～ひざ位　": 4, "ひざ上以上　　　": 5, "家から出られない": 6
+  }, _prefix: true
   enum snow_state_method: {
-    nothing: 0, powder: 1, fluffy: 2, compacted: 3, slippery: 4, melting: 5
-  }
-  # nothing=雪なし, powder=さらさら, fluffy=ふわふわ, compacted=踏まれたり雨が降ったりしてかたい,
-  # slippery=凍っていて滑りやすい, melting=溶けてぐちゃぐちゃ
-  
+    "雪はない　　　　": 0, "さらさら 　　　　": 1, "ふわふわ　　　　": 2, "どっしりかたい　　": 3,
+    "つるつる滑りやすい": 4, "溶けてぐちゃぐちゃ": 5
+  }, _prefix: true
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

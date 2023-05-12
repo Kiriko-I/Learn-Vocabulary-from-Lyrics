@@ -48,11 +48,11 @@ class User::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message)
+    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image)
   end
 
   def ensure_correct_user
-    @post = post.find(params[:id])
+    @post = Post.find(params[:id])
     unless @post.user == current_user
       redirect_to posts_path
     end
