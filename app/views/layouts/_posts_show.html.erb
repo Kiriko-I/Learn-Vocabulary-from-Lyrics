@@ -26,24 +26,30 @@
                   メッセージ：<%= post.message %>
                 <% end %>
               </p>
-              <% if user_signed_in? %>
-                <% if current_user.id != 1 %>
-                  <div id="favorite-<%= post.id %>" class="btn btn-secondary">
-                    <%= render 'user/favorites/btn', post: post %>
-                  </div>
-                <% end %>
-                <% if post.user == current_user %>
-                  <%= link_to edit_post_path(post.id), class: "btn btn-secondary" do %>
-                    <i class="fa-solid fa-pen-to-square"></i> 編集する
+              <div class="mb-3">
+                <% if user_signed_in? %>
+                  <% if current_user.id != 1 %>
+                    <div id="favorite-<%= post.id %>" class="btn btn-secondary">
+                      <%= render 'user/favorites/btn', post: post %>
+                    </div>
                   <% end %>
-                  <%= link_to post_path(post.id), method: :delete, class: "btn btn-danger" do %>
+                  <% if post.user == current_user %>
+                    <%= link_to edit_post_path(post.id), class: "btn btn-secondary" do %>
+                      <i class="fa-solid fa-pen-to-square"></i> 編集する
+                    <% end %>
+                    <%= link_to post_path(post.id), method: :delete, class: "btn btn-danger" do %>
+                      <i class="fa-solid fa-trash"></i> 削除する
+                    <% end %>
+                  <% end %>
+                <% elsif admin_signed_in? %>
+                  <%= link_to admin_post_path(post.id), method: :delete, class: "btn btn-danger" do %>
                     <i class="fa-solid fa-trash"></i> 削除する
                   <% end %>
                 <% end %>
-              <% elsif admin_signed_in? %>
-                <%= link_to admin_post_path(post.id), method: :delete, class: "btn btn-danger" do %>
-                  <i class="fa-solid fa-trash"></i> 削除する
-                <% end %>
+              </div>
+              <%= render 'user/comments/index', post: post %>
+              <% if user_signed_in? %>
+                <%= render 'user/comments/form', post: post, comment: comment %>
               <% end %>
             </div>
             <div class="col-4">
@@ -55,7 +61,6 @@
             </div>
           </div>
         </div>
-
         <div class="card-footer bg-transparent border-secondary">
           <small class="text-muted">投稿日時：<%= post.created_at %></small>
         </div>
