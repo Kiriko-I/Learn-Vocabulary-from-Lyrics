@@ -41,5 +41,5 @@
     <label for="message" class="form-label">メッセージ(70字以内)</label>
     <%= f.text_area :message, placeholder: "メッセージやアドバイスなどご自由にどうぞ", class: "form-control", id: "message" %>
   </div>
-  <%= f.submit "投稿する", class: "btn btn-primary" %>
+  <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> 投稿する</button>
 <% end %>
