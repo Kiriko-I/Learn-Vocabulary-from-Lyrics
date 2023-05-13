@@ -5,7 +5,7 @@
         <div class="card-body">
           <h5 class="card-title">
             <% if user.profile_image.present? %>
-              <%= image_tag user.profile_image, size:'50x50', class: "rounded-circle" %>
+              <%= image_tag user.profile_image, size:'60x60', class: "rounded-circle" %>
             <% else %>
               <i class="fa-solid fa-snowman fa-3x"></i>
             <% end %>
@@ -14,15 +14,19 @@
             <% if user_signed_in? && current_user.id != 1 %>
               <%= render 'user/relationships/btn', user: user %>
             <% end %>
+            <% if admin_signed_in? && user.id != 1 %>
+              <%= link_to admin_user_path(user.id), class: "btn btn-secondary" do %>
+                <i class="fa-solid fa-eye"></i> 投稿を見る
+              <% end %>
+              <%= link_to admin_user_path(user.id), method: :delete, class: "btn btn-danger" do %>
+                <i class="fa-solid fa-trash"></i> ユーザーを削除する
+              <% end %>
+            <% elsif user_signed_in? %>
+              <%= link_to show_user_path(user.id), class: "btn btn-secondary" do %>
+                <i class="fa-solid fa-eye"></i> 投稿を見る
+              <% end %>
+            <% end %>
           </h5>
-          <% if admin_signed_in? && user.id != 1 %>
-            <%= link_to admin_user_path(user.id), class: "btn btn-secondary" do %>
-              <i class="fa-solid fa-eye"></i> ユーザーの投稿を見る
-            <% end %>
-            <%= link_to admin_user_path(user.id), method: :delete, class: "btn btn-danger" do %>
-              <i class="fa-solid fa-trash"></i> ユーザーを削除する
-            <% end %>
-          <% end %>
         </div>
       </div>
     </div>

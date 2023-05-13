@@ -16,15 +16,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
-    get 'users_search' => 'searches#users_search'
-    get 'posts_search' => 'searches#posts_search'
+    get 'search' => 'searches#search'
     resources :users, only: [:index, :show, :destroy]
     resources :posts, only: [:index, :show, :destroy]
   end
 
   scope module: :user do
-    get 'users_search' => 'searches#users_search'
-    get 'posts_search' => 'searches#posts_search'
+    get 'search' => 'searches#search'
     get 'posts/favorites' => 'favorites#index'
     get 'users/mypage' => 'users#mypage', as: 'mypage'
     get 'users/information/edit' => 'users#edit', as: 'edit_information'

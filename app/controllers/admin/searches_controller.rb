@@ -1,4 +1,4 @@
-class User::SearchesController < ApplicationController
+class Admin::SearchesController < ApplicationController
   
 	def search
 	  @model = params[:model]
@@ -11,5 +11,5 @@ class User::SearchesController < ApplicationController
 		  @users = User.search_for(@nickname).order(created_at: :desc)
 		end
 	end
-
+	
 end

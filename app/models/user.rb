@@ -51,5 +51,9 @@ class User < ApplicationRecord
       user.name = "guestuser"
     end
   end
+  
+  def self.search_for(nickname)
+    User.where('nickname LIKE ?', "%#{nickname}%")
+  end
 
 end

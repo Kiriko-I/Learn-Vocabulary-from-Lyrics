@@ -6,7 +6,7 @@
       <div class="card-body">
         <h5 class="card-title mb-3">
           <% if @user.profile_image.exist? %>
-            <%= image_tag @user.profile_image, size:'10x10' %>
+            <%= image_tag @user.profile_image, size:'60x60' %>
           <% else %>
             <i class="fa-solid fa-snowman fa-2xl"></i>
           <% end %>
