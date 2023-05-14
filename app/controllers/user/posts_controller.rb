@@ -22,7 +22,7 @@ class User::PostsController < ApplicationController
       redirect_to post_path(@post), notice: "投稿しました。"
     else
       @posts = Post.all
-      render 'index'
+      render 'new'
     end
   end
 
@@ -31,12 +31,10 @@ class User::PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    if post.update(post_params)
+    if @post.update(post_params)
       redirect_to post_path(post), notice: "投稿を更新しました。"
     else
-      @post = Post.find(params[:id])
-      render "edit"
+      render 'edit'
     end
   end
 

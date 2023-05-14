@@ -1,5 +1,6 @@
 <div class="col-11">
   <%= form_with(model:[post, comment], local: true) do |f| %>
+    <%= render 'layouts/error_messages', obj: comment %>
     <label for="comment" class="form-label mt-5">コメント(70字以内)</label>
     <%= f.text_area :comment, rows:'2', placeholder: "追加情報などありましたらコメントください", class: "form-control mb-3", id: "comment" %>
     <%= f.submit "送信する", class: "btn btn-primary" %>

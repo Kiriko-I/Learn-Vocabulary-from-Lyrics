@@ -2,14 +2,7 @@
 
 <div class="row">
   <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-    <% if @user.errors.any? %>
-      <%= @user.errors.count %>件のエラーが発生しました
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+    <%= render 'layouts/error_messages', obj: @user %>
     <div class="col-7 mb-3">
       <label for="name" class="form-label">氏名</label>
       <%= f.text_field :name, placeholder: "佐藤　太郎", class: "form-control", id: "name" %>

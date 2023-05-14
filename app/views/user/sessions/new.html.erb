@@ -2,14 +2,7 @@
 
 <div class="row">
   <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-    <% if @user.errors.any? %>
-      <%= @user.errors.count %>件のエラーが発生しました
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+    <%= render 'layouts/error_messages', obj: @user %> 
     <div class="col-7 mb-3">
       <label for="email" class="form-label">メールアドレス</label>
       <%= f.email_field :email, placeholder: "name@example.com", class: "form-control", id: "email" %>
@@ -19,12 +12,12 @@
       <%= f.password_field :password, class: "form-control", id: "password" %>
     </div>
 
-    <!--<% if devise_mapping.rememberable? %>-->
-    <!--  <div class="col-7 mb-3">-->
-    <!--    <%= f.check_box :remember_me %>-->
-    <!--    <%= f.label :remember_me %>-->
-    <!--  </div>-->
-    <!--<% end %>-->
+    <% if devise_mapping.rememberable? %>
+      <div class="col-7 mb-3">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
 
     <div class="col-7 mb-3">
       <%= f.submit "ログイン", class: "btn btn-info" %>

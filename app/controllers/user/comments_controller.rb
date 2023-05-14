@@ -7,8 +7,12 @@ class User::CommentsController < ApplicationController
     # @comment = Comment.new(comment_params)
     # @comment.user_id = current_user.id    
     @comment.post_id = post.id
-    @comment.save
-    redirect_back(fallback_location: posts_path)
+    if @comment.save
+      redirect_back(fallback_location: posts_path)
+    else
+      @post = Post.find(params[:post_id])
+      render "user/posts/show"
+    end
   end
 
   def destroy
