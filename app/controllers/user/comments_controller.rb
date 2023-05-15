@@ -8,17 +8,20 @@ class User::CommentsController < ApplicationController
     # @comment.user_id = current_user.id    
     @comment.post_id = post.id
     if @comment.save
-      redirect_back(fallback_location: posts_path)
+      flash[:success] = 'コメントを投稿しました。'
+      redirect_to post_path(post)
     else
-      @post = Post.find(params[:post_id])
+      @post = post
       render "user/posts/show"
     end
   end
 
   def destroy
-    @comment = Comment.find_by(id: params[:id], post_id: params[:post_id])
+    post = Post.find(params[:post_id])
+    @comment = Comment.find_by(id: params[:id], post_id: post)
     @comment.destroy
-    redirect_back(fallback_location: posts_path)
+    flash[:warning] = 'コメントを削除しました。'
+    redirect_to post_path(post)
   end
 
   private

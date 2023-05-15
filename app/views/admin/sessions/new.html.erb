@@ -1,5 +1,7 @@
 <h2>管理者ログイン</h2>
 
+<%= render 'layouts/flash' %>
+
 <div class="row">
   <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
     <%= render 'layouts/error_messages', obj: @admin %>

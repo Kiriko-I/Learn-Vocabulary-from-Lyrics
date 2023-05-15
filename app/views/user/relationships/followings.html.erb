@@ -1,5 +1,6 @@
 <h2>フォロー一覧</h2>
-<% if @users.exists? %>
+
+<% if @users.present? %>
   <%= render 'layouts/users_index', users: @users %>
 <% else %>
   <p>ユーザーはいません</p>

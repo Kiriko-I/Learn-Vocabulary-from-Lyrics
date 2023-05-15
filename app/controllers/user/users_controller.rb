@@ -18,7 +18,8 @@ class User::UsersController < ApplicationController
   def update
     user = current_user
     if user.update(user_params)
-      redirect_to mypage_path, notice: 'ユーザー情報を更新しました。'
+      flash[:success] = 'ユーザー情報を更新しました。'
+      redirect_to mypage_path
     else
       @user = current_user
       render 'edit'
@@ -26,9 +27,10 @@ class User::UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
+    user = current_user
     user.destroy
-    redirect_to admin_users_path
+    flash[:danger] = '退会しました。'
+    redirect_to new_user_registration_path
   end
 
   private
@@ -41,7 +43,8 @@ class User::UsersController < ApplicationController
     @user = current_user
     if @user.name == "guestuser"
       @user = current_user
-      redirect_to posts_path, notice: 'ゲストはプロフィール画面へ遷移できません。'
+      flash[:alert] = 'ゲストはプロフィール画面へ遷移できません。'
+      redirect_to posts_path
     end
   end
 

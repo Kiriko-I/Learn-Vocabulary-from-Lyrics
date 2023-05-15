@@ -3,7 +3,7 @@ class User::FavoritesController < ApplicationController
 
   def index
     favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
-    @posts = Post.find(favorites).order(created_at: :desc)
+    @posts = Post.find(favorites)
   end
 
   def create

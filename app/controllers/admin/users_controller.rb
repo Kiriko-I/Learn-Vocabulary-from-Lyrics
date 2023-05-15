@@ -12,16 +12,8 @@ class Admin::UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
-    redirect_to new_user_session_path
+    flash[:warning] = 'ユーザーを削除しました'
+    redirect_to admin_users_path
   end
-
-  private
-
-  # def ensure_correct_user
-  #   @user = User.find(params[:id])
-  #   unless @user == current_user
-  #     redirect_to user_path(current_user)
-  #   end
-  # end
 
 end
