@@ -18,6 +18,7 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    
     if @post.save
       flash[:success] = "投稿に成功しました。"
       redirect_to post_path(@post)
@@ -47,10 +48,19 @@ class User::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+def map
+  results = Geocoder.search(params[:address])
+  @latlng = results.first.coordinates
+  # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+
+  respond_to do |format|
+    format.js
+  end
+end
   private
 
   def post_params
-    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image)
+    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image, :address, :latitude, :longitude)
   end
 
   def ensure_correct_user

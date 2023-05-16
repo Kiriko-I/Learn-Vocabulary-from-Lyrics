@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :snow_image
   validates :message, length: { maximum: 70 }
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
   enum sidewalk_method: {
     "いつもどおり歩ける　　　　　　　　": 0,
@@ -43,5 +45,13 @@ class Post < ApplicationRecord
 		  Post.where(['prefecture LIKE ? AND city LIKE ?', "%#{prefecture}%", "%#{city}%"])
 		end
   end
+  
+  def current_position
+    #現在地を返す
+  end
+
+  # def address
+  #   [street, city, state, country].compact.join(', ')
+  # end
 		
 end
