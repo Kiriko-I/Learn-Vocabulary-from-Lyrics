@@ -19,7 +19,7 @@
 </style>
 
 <script>
-  // let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
+  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
   function initMap(){
     geocoder = new google.maps.Geocoder()
     let map = new google.maps.Map(document.getElementById('map'), {
@@ -28,9 +28,8 @@
     zoom: 15
     });
     marker = new google.maps.Marker({
-      position:  {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+      position: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
       map: map
     });
   }
 </script>
-</script><script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap" async defer></script>

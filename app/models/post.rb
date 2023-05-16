@@ -46,12 +46,4 @@ class Post < ApplicationRecord
 		end
   end
   
-  def current_position
-    #現在地を返す
-  end
-
-  # def address
-  #   [street, city, state, country].compact.join(', ')
-  # end
-		
 end
