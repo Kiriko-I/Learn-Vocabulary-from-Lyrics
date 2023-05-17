@@ -42,7 +42,7 @@ class Post < ApplicationRecord
 		if prefecture == '0'
 		  Post.where('city LIKE ?', "%#{city}%")
 		else
-		  Post.where(['prefecture LIKE ? AND city LIKE ?', "%#{prefecture}%", "%#{city}%"])
+		  Post.where(['prefecture LIKE ? AND city LIKE ?', "#{prefecture}", "%#{city}%"])
 		end
   end
 

@@ -8,7 +8,11 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    if current_user.prefecture == 0
+      @posts = Post.all.order(created_at: :desc)
+    else
+      @posts = Post.where(prefecture: current_user.prefecture).order(created_at: :desc)
+    end
   end
 
   def new
