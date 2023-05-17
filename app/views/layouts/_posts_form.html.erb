@@ -59,7 +59,7 @@
 
 <style>
   #map{
-    height: 100px;
+    height: 200px;
   }
 </style>
 
@@ -88,7 +88,7 @@
     document.getElementById("longitude").value = lng;
     //マーカークリック時のイベント
     map.addListener('click', function(e) {
-      dragMap(e.latLng, map);
+      clickMap(e.latLng, map);
     });
   }
 
@@ -138,7 +138,7 @@
   }
 
   // ピンの位置を修正した場合の処理
-  function dragMap(geo, map) {
+  function clickMap(geo, map) {
     lat = geo.lat();
     lng = geo.lng();
     document.getElementById("latitude").value = lat;
