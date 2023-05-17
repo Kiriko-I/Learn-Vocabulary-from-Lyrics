@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'comments/destroy'
+  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -11,14 +14,16 @@ Rails.application.routes.draw do
     get '/' => 'user/sessions#new', as: 'new_user_session'
     post 'user/sign_in' => 'user/sessions#create', as: 'user_session'
     delete 'user/sign_out' => 'user/sessions#destroy', as: 'destroy_user_session'
-    post 'user/guest_sign_in', to: 'user/sessions#guest_sign_in'
+    post 'user/guest_sign_in' => 'user/sessions#guest_sign_in'
   end
 
   namespace :admin do
     root to: 'homes#top'
     get 'search' => 'searches#search'
     resources :users, only: [:index, :show, :destroy]
-    resources :posts, only: [:index, :show, :destroy]
+    resources :posts, only: [:index, :show, :destroy] do
+      delete '/comments/:id' => 'comments#destroy', as: 'comment'
+    end
   end
 
   scope module: :user do

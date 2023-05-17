@@ -1,7 +1,7 @@
 <div class="col-11">
   <table class="table">
     <thead>
-      <i class="fa-solid fa-comment"></i> コメント
+      <i class="fa-solid fa-comment"></i> <%= post.comments.count %> コメント
     </thead>
     <tbody>
       <% post.comments.each do |comment| %>
@@ -18,12 +18,14 @@
           </td>
           <td><%= comment.comment %></td>
           <td>
-            <% if comment.user == current_user || admin_signed_in? %>
+            <% if comment.user == current_user %>
               <%= link_to "コメント削除", post_comment_path(post, comment), method: :delete, class: "btn btn-danger pull-right", remote: false %>
+            <% elsif admin_signed_in? %>
+              <%= link_to "コメント削除", admin_post_comment_path(post, comment), method: :delete, class: "btn btn-danger pull-right", remote: false %>
             <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
-  </table>  
+  </table>
 </div>

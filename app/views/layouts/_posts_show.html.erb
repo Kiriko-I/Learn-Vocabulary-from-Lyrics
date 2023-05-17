@@ -2,13 +2,20 @@
   <div class="col">
     <div class="card border-secondary">
       <div class="card-header bg-transparent border-secondary">
-        <%= link_to show_user_path(post.user.id), class: "text-decoration-none" do %>
-          <% if post.user.profile_image.present? %>
-            <%= image_tag post.user.profile_image, size:'50x50', class: "rounded-circle" %>
-          <% else %>
-            <i class="fa-solid fa-snowman fa-3x"></i>
+        <% if post.user.profile_image.present? %>
+          <%= image_tag post.user.profile_image, size:'50x50', class: "rounded-circle" %>
+        <% else %>
+          <i class="fa-solid fa-snowman fa-3x"></i>
+        <% end %>
+        <%= post.user.nickname %>
+        <% if admin_signed_in? && post.user.id != 1 %>
+          <%= link_to admin_user_path(post.user.id), class: "btn btn-secondary" do %>
+            <i class="fa-solid fa-eye"></i> 投稿を見る
           <% end %>
-          <%= post.user.nickname %>
+        <% elsif user_signed_in? %>
+          <%= link_to show_user_path(post.user.id), class: "btn btn-secondary" do %>
+            <i class="fa-solid fa-eye"></i> 投稿を見る
+          <% end %>
         <% end %>
       </div>
       <div class="card-body">
