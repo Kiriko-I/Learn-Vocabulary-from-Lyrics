@@ -31,6 +31,6 @@ Geocoder.configure(
   #   Geocoder::InvalidRequest,
   #   Geocoder::InvalidApiKey
   # ],
-  api_key:  ENV['GOOGLEMAP'] ,
-  use_https: true
+  # api_key:  ENV['GOOGLEMAP'] ,
+  # use_https: true
 )

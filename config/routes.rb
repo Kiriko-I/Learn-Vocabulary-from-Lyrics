@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :user do
-    get '/map_request', to: 'posts#map', as: 'map_request'
+    # get '/map_request', to: 'posts#map', as: 'map_request'
     get 'search' => 'searches#search'
     get 'posts/favorites' => 'favorites#index'
     get 'users/mypage' => 'users#mypage', as: 'mypage'

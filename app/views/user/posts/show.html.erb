@@ -3,33 +3,3 @@
 <%= render 'layouts/flash' %>
 
 <%= render 'layouts/posts_show', post: @post, comment: @comment %>
-
-<h2>gmap</h2>
-<!--<%= form_with url: map_request_path, local: false, method: :get do |f| %>-->
-<!--  <%= f.text_field :address %>-->
-<!--  <%= f.submit '地図表示' %>-->
-<!--<% end %>-->
-
-<div id="map"></div>
-
-<style>
-#map{
-  height: 400px;
-}
-</style>
-
-<script>
-  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
-  function initMap(){
-    geocoder = new google.maps.Geocoder()
-    let map = new google.maps.Map(document.getElementById('map'), {
-    // mapInstance = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
-    zoom: 15
-    });
-    marker = new google.maps.Marker({
-      position: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
-      map: map
-    });
-  }
-</script>
