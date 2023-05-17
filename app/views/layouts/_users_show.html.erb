@@ -39,11 +39,11 @@
           </p>
           <div>
             <% if admin_signed_in? %>
-              <%= link_to admin_post_path(post.id), class: "btn btn-secondary" do %>
+              <%= link_to admin_post_path(post.id), 'data-turbolinks': false, class: "btn btn-secondary" do %>
                 <i class="fa-solid fa-eye"></i> 詳しく見る
               <% end %>
             <% else %>
-              <%= link_to post_path(post.id), class: "btn btn-secondary" do %>
+              <%= link_to post_path(post.id), 'data-turbolinks': false,class: "btn btn-secondary" do %>
                 <i class="fa-solid fa-eye"></i> 詳しく見る
               <% end %>
               <% if current_user.id != 1 %>

@@ -41,7 +41,7 @@
                   </div>
                 <% end %>
                 <% if post.user == current_user %>
-                  <%= link_to edit_post_path(post.id), class: "btn btn-secondary" do %>
+                  <%= link_to edit_post_path(post.id), 'data-turbolinks': false, class: "btn btn-secondary" do %>
                     <i class="fa-solid fa-pen-to-square"></i> 編集する
                   <% end %>
                   <%= link_to post_path(post.id), method: :delete, class: "btn btn-danger" do %>
@@ -89,6 +89,7 @@
 <script>
   // let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
   function initMap(){
+    <% if @post.latitude && @post.longitude %>
     geocoder = new google.maps.Geocoder()
     let map = new google.maps.Map(document.getElementById('map'), {
     // mapInstance = new google.maps.Map(document.getElementById('map'), {
@@ -99,5 +100,7 @@
       position: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
       map: map
     });
+    <% end %>
   }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap" async defer></script>

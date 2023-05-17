@@ -52,8 +52,8 @@
     </div>
     <div id='map'></div>
   </div>
-  <input id="latitude" value=<%= f.hidden_field :latitude %>
-  <input id="longitude" value=<%= f.hidden_field :longitude %>
+  <input type="hidden" id="latitude" value="<%= f.object.latitude %>" />
+  <input type="hidden" id="longitude" value="<%= f.object.longitude %>" />
   <button type="submit" form= "form" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> 投稿する</button>
 <% end %>
 
@@ -70,7 +70,12 @@
   // 基準地（東京都）の緯度経度
   let lat = 35.6894
   let lng = 139.6917
-
+  <% if post.latitude %>
+   lat = <%= post.latitude %>;
+  <% end %>
+  <% if post.longitude %>
+   lng = <%= post.longitude %>;
+  <% end %>
   function initMap(){
     // geocoderの初期化
     geocoder = new google.maps.Geocoder()
@@ -139,12 +144,14 @@
 
   // ピンの位置を修正した場合の処理
   function clickMap(geo, map) {
+    console.log(geo.lat());
+    console.log(geo.lng());
     lat = geo.lat();
     lng = geo.lng();
     document.getElementById("latitude").value = lat;
     document.getElementById("longitude").value = lng;
     //中心にスクロール
-    map.setCenter(geo);
+    /*map.setCenter(geo);
     //マーカーの更新
     marker.setMap(null);
     marker = null;
@@ -152,5 +159,15 @@
       map: map,
       position: geo
     });
+    */
+    let location = new google.maps.LatLng(lat, lng)
+    marker.setMap(null);
+    marker = new google.maps.Marker({
+      map: map,
+      position: location
+    });
+    map.setCenter(location);
+
   }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap" async defer></script>
