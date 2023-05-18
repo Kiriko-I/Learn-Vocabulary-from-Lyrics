@@ -14,12 +14,12 @@
       <%= f.password_field :password, class: "form-control", id: "password" %>
     </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="col-7 mb-3">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end %>
+    <!--<% if devise_mapping.rememberable? %>-->
+    <!--  <div class="col-7 mb-3">-->
+    <!--    <%= f.check_box :remember_me %>-->
+    <!--    <%= f.label :remember_me %>-->
+    <!--  </div>-->
+    <!--<% end %>-->
 
     <div class="col-7 mb-3">
       <%= f.submit "ログイン", class: "btn btn-info" %>

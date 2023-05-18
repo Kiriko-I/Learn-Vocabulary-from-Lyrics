@@ -1,0 +1,111 @@
+<div class="row mb-3">
+  <label for="map" class="form-label">位置情報の登録（任意）</label>
+  <div class="input-group">
+    <%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-outline-primary me-2" %>
+    <input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">
+    <%= button_tag "検索", type: 'button', onclick: "codeAddress()", class: "btn btn-outline-secondary" %>
+  </div>
+  <div id='map'></div>
+</div>
+
+<style>
+  #map{
+    height: 200px;
+  }
+</style>
+
+<script>
+  let map
+  let geocoder
+  let marker = null
+  // 基準地（東京都）の緯度経度
+  let lat = 35.6894
+  let lng = 139.6917
+
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: {lat: lat, lng: lng}
+    });
+    //初期マーカー
+    marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(lat, lng),
+    });
+    document.getElementById("latitude").value = lat;
+    document.getElementById("longitude").value = lng;
+    //マーカークリック時のイベント
+    map.addListener('click', function(e) {
+      dragMap(e.latLng, map);
+    });
+  }
+
+  // 現在位置取得ボタンを押した時の処理
+  document.getElementById("btn").onclick = function(){
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  };
+  // 取得に成功した場合の処理
+  function successCallback(position){
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+    document.getElementById("latitude").value = lat;
+    document.getElementById("longitude").value = lng;
+    map.setCenter(
+      new google.maps.LatLng(lat, lng)
+    );
+    marker.setMap(null);
+    marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(lat, lng)
+    });
+  };
+  // 取得に失敗した場合の処理
+  function errorCallback(error){
+      alert("位置情報が取得できませんでした");
+  };
+
+  // 検索窓で検索した場合の処理
+  function codeAddress(){
+    const inputAddress = document.getElementById('address').value;
+    geocoder.geocode( {'address': inputAddress}, function(results, status) {
+      if (status == 'OK') {
+        let location = results[0].geometry.location;
+        lat = location.lat();
+        lng = location.lng();
+        document.getElementById("latitude").value = lat;
+        document.getElementById("longitude").value = lng;
+        map.setCenter(location);
+        marker = new google.maps.Marker({
+          map: map,
+          position: location
+        });
+      } else {
+        alert('該当する結果がありませんでした：' + status);
+      }
+    });
+  }
+
+  // ピンの位置を修正した場合の処理
+  function dragMap(geo, map) {
+    lat = geo.lat();
+    lng = geo.lng();
+    document.getElementById("latitude").value = lat;
+    document.getElementById("longitude").value = lng;
+    //中心にスクロール
+    map.setCenter(geo);
+    //マーカーの更新
+    marker.setMap(null);
+    marker = null;
+    marker = new google.maps.Marker({
+      map: map,
+      position: geo
+    });
+  }
+</script>
+
+緯度：<input type="text" id="latitude" name="latitude" value="" size="20">　経度：<input type="text" id="longitude" name="longitude" value="" size="20">
+<%= form_with model: post, local: true, id: "form" do |map| %>
+  <%= map.hidden_field :latitude %>
+  <%= map.hidden_field :longitude %>
+<% end %>

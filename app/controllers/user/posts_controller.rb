@@ -8,7 +8,11 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    if current_user.prefecture == 0
+      @posts = Post.all.order(created_at: :desc)
+    else
+      @posts = Post.where(prefecture: current_user.prefecture).order(created_at: :desc)
+    end
   end
 
   def new
@@ -47,10 +51,19 @@ class User::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+# def map
+#   results = Geocoder.search(params[:address])
+#   @latlng = results.first.coordinates
+#   # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+#   respond_to do |format|
+#     format.js
+#   end
+# end
+
   private
 
   def post_params
-    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image)
+    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image, :address, :latitude, :longitude)
   end
 
   def ensure_correct_user
