@@ -7,7 +7,6 @@
         <% else %>
           <i class="fa-solid fa-snowman fa-3x"></i>
         <% end %>
-        <%= post.user.nickname %>
         <% if admin_signed_in? && post.user.id != 1 %>
           <%= link_to post.user.nickname, admin_user_path(post.user.id), class: "text-decoration-none text-secondary h6" %>
         <% elsif user_signed_in? %>

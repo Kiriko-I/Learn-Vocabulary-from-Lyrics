@@ -7,3 +7,8 @@ body {
   color: #6c757d;
   font-family: 'Sawarabi Gothic', Helvetica, Arial, sans-serif;
 }
+
+h1 {
+  letter-spacing: 0.2em;
+  background: linear-gradient(transparent 70%, #F29A72 50%);
+}
