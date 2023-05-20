@@ -9,13 +9,9 @@
         <% end %>
         <%= post.user.nickname %>
         <% if admin_signed_in? && post.user.id != 1 %>
-          <%= link_to admin_user_path(post.user.id), class: "btn btn-secondary" do %>
-            <i class="fa-solid fa-eye"></i> 投稿を見る
-          <% end %>
+          <%= link_to post.user.nickname, admin_user_path(post.user.id), class: "text-decoration-none text-secondary h6" %>
         <% elsif user_signed_in? %>
-          <%= link_to show_user_path(post.user.id), class: "btn btn-secondary" do %>
-            <i class="fa-solid fa-eye"></i> 投稿を見る
-          <% end %>
+          <%= link_to post.user.nickname, show_user_path(post.user.id), class: "text-decoration-none text-secondary h6" %>
         <% end %>
       </div>
       <div class="card-body">

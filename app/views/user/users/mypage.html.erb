@@ -2,7 +2,7 @@
 
 <%= render 'layouts/flash' %>
 
-<div class="row row-cols-1 g-4">
+<div class="row row-cols-1 g-4 position-absolute top-50 start-50 translate-middle">
   <div class="col">
     <div class="card h-100 border-secondary">
       <div class="card-body">
@@ -15,19 +15,19 @@
           <%= @user.nickname %>
           <%= User.prefecture_methods.keys[@user.prefecture] %>
         </h5>
-        <%= link_to edit_information_path, class: "btn btn-info" do %>
+        <%= link_to edit_information_path, class: "btn btn-info me-1 mb-1" do %>
           <i class="fa-solid fa-user-pen"></i> ユーザー情報編集
         <% end %>
-        <%= link_to show_user_path(@user.id), class: "btn btn-secondary" do %>
+        <%= link_to show_user_path(@user.id), class: "btn btn-secondary me-1 mb-1" do %>
           <i class="fa-solid fa-list"></i> 投稿履歴
         <% end %>
-        <%= link_to posts_favorites_path, class: "btn btn-secondary" do %>
+        <%= link_to posts_favorites_path, class: "btn btn-secondary me-1 mb-1" do %>
           <i class="fa-solid fa-bookmark"></i> しおり一覧
         <% end %>
-        <%= link_to followings_path(@user.id), class: "btn btn-secondary" do %>
+        <%= link_to followings_path(@user.id), class: "btn btn-secondary me-1 mb-1" do %>
           <i class="fa-solid fa-star"></i> フォロー一覧
         <% end %>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-danger me-1 mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <i class="fa-solid fa-user-slash"></i> アカウント削除
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -45,7 +45,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                <%= link_to "削除", destroy_information_path, method: :delete, class: "btn btn-danger" %>
+                <%= link_to "削除", destroy_information_path, method: :delete, class: "btn btn-danger me-1 mb-1" %>
               </div><!-- /.modal-footer -->
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->

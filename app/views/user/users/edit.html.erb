@@ -1,6 +1,6 @@
 <h1>ユーザー情報編集</h1>
 
-<div class="row">
+<div class="row position-absolute top-50 start-50 translate-middle">
   <%= form_with model: @user, url: update_information_path, local: true do |f| %>
     <%= render 'layouts/error_messages', obj: @user %> 
     <div class="col-7 mb-3">
