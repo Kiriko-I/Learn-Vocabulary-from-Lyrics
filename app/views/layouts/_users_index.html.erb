@@ -6,7 +6,9 @@
           <h5 class="card-title">
             <%= image_tag user.get_profile_image, size:'50x50', class: "rounded-circle" %>
             <%= user.nickname %>
-            <%= User.prefecture_methods.keys[user.prefecture] %>
+            <small>
+              登録：<%= User.prefecture_methods.keys[user.prefecture] %>
+            </small>
             <% if user_signed_in? && current_user.id != 1 %>
               <%= render 'user/relationships/btn', user: user %>
             <% end %>

@@ -2,8 +2,8 @@
 
 <%= render 'layouts/flash' %>
 
-<div class="row row-cols-1 g-4 position-absolute top-50 start-50 translate-middle">
-  <div class="col">
+<div class="row justify-content-center">
+  <div class="col col-lg-5">
     <div class="card h-100 border-info">
       <div class="card-body d-grid gap-1">
         <h5 class="card-title mb-3">
@@ -12,8 +12,10 @@
           <% else %>
             <i class="fa-solid fa-snowman fa-3x"></i>
           <% end %>
-          <%= @user.nickname %>
-          <%= User.prefecture_methods.keys[@user.prefecture] %>
+          <%= @user.nickname %><br>
+          <small>
+            登録：<%= User.prefecture_methods.keys[@user.prefecture] %>
+          </small>
         </h5>
         <%= link_to edit_information_path, class: "btn btn-info px-5" do %>
           <i class="fa-solid fa-user-pen"></i> ユーザー情報編集
@@ -26,29 +28,31 @@
         <% end %><br>
         <%= link_to followings_path(@user.id), class: "btn btn-secondary" do %>
           <i class="fa-solid fa-star"></i> フォロー一覧
-        <% end %><br>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal">
-          <i class="fa-solid fa-user-slash"></i> アカウント削除
-        </button>
-        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="ModalLabel">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">アカウント削除確認</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
-              </div>
-              <div class="modal-body">
-                <p>
-                  本当に削除してよろしいですか？<br>
-                  アカウント情報は削除され、元に戻すことはできません。
-                </p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                <%= link_to "削除", destroy_information_path, method: :delete, class: "btn btn-danger me-1 mb-1" %>
-              </div>
-            </div>
-          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="d-grid d-lg-block text-center mt-3">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fa-solid fa-user-slash"></i> アカウント削除
+    </button>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">アカウント削除確認</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            本当に削除してよろしいですか？<br>
+            アカウント情報は削除され、元に戻すことはできません。
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+          <%= link_to "削除", destroy_information_path, method: :delete, class: "btn btn-danger me-1 mb-1" %>
         </div>
       </div>
     </div>

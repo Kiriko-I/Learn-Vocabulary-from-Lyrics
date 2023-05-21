@@ -16,7 +16,7 @@
     </div>
     <div class="col-7 mb-3">
       <label for="prefecture" class="form-label">登録する都道府県名</label>
-      <%= f.select :prefecture, User.prefecture_methods.keys, {}, class: "form-select", id: "prefecture" %>
+      <%= f.select :prefecture, User.prefecture_methods.map {|k| [k[0], k[1]]}, {}, class: "form-select", id: "prefecture" %>
     </div>
     <div class="col-7 mb-3">
       <label for="email" class="form-label">メールアドレス</label>
@@ -31,7 +31,7 @@
       <%= f.password_field :password_confirmation, class: "form-control", id: "password_confirmation" %>
     </div>
     <div class="col-7 mb-3">
-      <%= f.submit "新規登録", class: "btn btn-primary" %>
+      <%= f.submit "新規登録", class: "btn btn-primary px-4" %>
     </div>
   <% end %>
   <%= render "user/shared/links" %>
