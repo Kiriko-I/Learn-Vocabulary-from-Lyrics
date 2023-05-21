@@ -4,20 +4,36 @@
   <div class="col">
     <div class="card h-100 border-secondary">
       <div class="card-body">
-        <h5 class="card-title mb-3">
-          <% if @user.profile_image.exist? %>
-            <%= image_tag @user.profile_image, size:'60x60' %>
-          <% else %>
-            <i class="fa-solid fa-snowman fa-2xl"></i>
-          <% end %>
+        <h5 class="card-title">
+          <%= image_tag @user.get_profile_image, size:'50x50', class: "rounded-circle" %>
           <%= @user.nickname %>
           <%= @user.prefecture %>
-        </h5>
-        <% if admin_signed_in? && @user.id != 1 %>
-          <%= link_to admin_user_path(@user.id), method: :delete, class: "btn btn-danger" do %>
-            <i class="fa-solid fa-trash"></i> ユーザーを削除する
+          <% if admin_signed_in? && @user.id != 1 %>
+            <button type="button" class="btn btn-danger px-4 btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-trash"></i> アカウント削除
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">アカウント削除確認</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      本当に削除してよろしいですか？<br>
+                      アカウント情報は削除され、元に戻すことはできません。
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    <%= link_to "削除", admin_user_path(@user.id), method: :delete, class: "btn btn-danger" %>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
-        <% end %>
+        </h5>
       </div>
     </div>
   </div>

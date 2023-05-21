@@ -61,8 +61,8 @@
           <label for="map" class="form-label">位置情報</label>
           <div class="input-group mt-1">
             <%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-primary me-2 px-4 btn-sm" %>
-            <%= f.text_field :address, class: "form-control", id: "address" %>
-            <!--<input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">-->
+            <!--<%= f.text_field :address, class: "form-control", id: "address" %>-->
+            <input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">
             <%= button_tag "検索", type: 'button', onclick: "codeAddress()", class: "btn btn-secondary px-4 btn-sm" %>
           </div>
           <div id='map' class="mt-1"></div>
@@ -71,8 +71,9 @@
         </span>
       </div>
     </div>
-
-    <button type="submit" form="form" class="btn btn-primary px-4"><i class="fa-solid fa-paper-plane"></i> 投稿する</button>
+    <div class="text-end">
+      <button type="submit" form="form" class="btn btn-primary px-4"><i class="fa-solid fa-paper-plane"></i> 投稿する</button>
+    </div>
   <% end %>
 </div>
 
@@ -83,7 +84,7 @@
 </style>
 
 <script>
-// 位置情報保存の可否
+  // 位置情報保存の可否
   let selecterBox = document.getElementById('map-form');
   function formSwitch() {
       check = document.getElementsByClassName('js-check')
@@ -91,17 +92,19 @@
           selecterBox.style.display = "block";
       } else if (check[1].checked) {
           selecterBox.style.display = "none";
+          document.getElementById("post_latitude").value = null;
+          document.getElementById("post_longitude").value = null;
       } else {
           selecterBox.style.display = "none";
       }
     }
     window.addEventListener('load', formSwitch());
-// 位置情報取得
-  let map
+  // 位置情報取得
   let geocoder
+  let map
+  let lat = null
+  let lng = null
   let marker = null
-  let lat
-  let lng
   <% if post.latitude %>
    lat = <%= post.latitude %>;
   <% end %>
@@ -129,7 +132,6 @@
       clickMap(e.latLng, map);
     });
   }
-
   // 現在位置取得ボタンを押した時の処理
   document.getElementById("btn").onclick = function(){
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -153,7 +155,6 @@
   function errorCallback(error){
       alert("位置情報が取得できませんでした");
   };
-
   // 検索窓で検索した場合の処理
   function codeAddress(){
     const inputAddress = document.getElementById('address').value;
@@ -174,7 +175,6 @@
       }
     });
   }
-
   // ピンの位置を修正した場合の処理
   function clickMap(geo, map) {
     lat = geo.lat();
@@ -188,7 +188,6 @@
       position: location
     });
     map.setCenter(location);
-
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap" async defer></script>

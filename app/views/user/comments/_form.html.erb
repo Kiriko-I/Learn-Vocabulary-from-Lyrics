@@ -3,6 +3,8 @@
     <%= render 'layouts/error_messages', obj: comment %>
     <label for="comment" class="form-label mt-5">コメント(70字以内)</label>
     <%= f.text_area :comment, rows:'2', placeholder: "追加情報などありましたらコメントください", class: "form-control mb-3", id: "comment" %>
-    <%= f.submit "コメント送信", class: "btn btn-primary" %>
+    <div class="text-end">
+      <%= f.submit "コメント送信", class: "btn btn-info px-4 btn-sm" %>
+    </div>
   <% end %>
 </div>

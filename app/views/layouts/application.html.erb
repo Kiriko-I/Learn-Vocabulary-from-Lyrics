@@ -48,31 +48,33 @@
             <% elsif user_signed_in? %>
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item me-2 mb-2 mb-lg-0">
-                  <%= link_to  new_post_path, 'data-turbolinks': false, class: "nav-link active" do %>
-                    <i class="fa-solid fa-snowflake fa-xl"></i> 新規投稿
+                  <% if current_user.id != 1 %>
+                    <%= link_to new_post_path, 'data-turbolinks': false, class: "btn btn-outline-success btn-lg" do %>
+                      <i class="fa-solid fa-snowflake fa-xl"></i> 投稿する
+                    <% end %>
                   <% end %>
                 </li>
                 <li class="nav-item me-2 mb-2 mb-lg-0">
-                  <%= link_to posts_path, class: "nav-link" do %>
-                    <i class="fa-solid fa-shoe-prints fa-xl"></i> <%= User.prefecture_methods.keys[current_user.prefecture] %>の投稿一覧
+                  <%= link_to posts_path, class: "btn btn-outline-secondary" do %>
+                    <%= User.prefecture_methods.keys[current_user.prefecture] %>の投稿一覧
                   <% end %>
                 </li>
                 <%= render 'layouts/search_form' %>
               </ul>
               <% if current_user.id != 1 %>
-                <%= link_to mypage_path, class: "btn btn-outline-info ms-2" do %>
+                <%= link_to mypage_path, class: "btn btn-info ms-2" do %>
                   <i class="fa-solid fa-user-gear fa-xl"></i>
                 <% end %>
               <% end %>
-              <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-warning ms-2" do %>
+              <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-warning ms-2" do %>
                 <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
               <% end %>
             <% else %>
               <form class="ms-auto">
-                <%= link_to new_user_session_path, class: "btn btn-outline-info ms-2" do %>
+                <%= link_to new_user_session_path, class: "btn btn-success ms-2" do %>
                   <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i> ログイン
                 <% end %>
-                <%= link_to new_user_registration_path, class: "btn btn-outline-primary ms-2" do %>
+                <%= link_to new_user_registration_path, class: "btn btn-primary ms-2" do %>
                   <i class="fa-solid fa-user-plus fa-xl"></i> 新規登録
                 <% end %>
               </form>

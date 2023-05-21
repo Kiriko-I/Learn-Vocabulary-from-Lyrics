@@ -1,7 +1,7 @@
 <div class="row row-cols-1 g-4">
   <% users.each do |user| %>
     <div class="col">
-      <div class="card h-100 border-info">
+      <div class="card h-100 border-info mx-auto">
         <div class="card-body">
           <h5 class="card-title">
             <%= image_tag user.get_profile_image, size:'50x50', class: "rounded-circle" %>
@@ -9,12 +9,9 @@
             <small>
               登録：<%= User.prefecture_methods.keys[user.prefecture] %>
             </small>
-            <% if user_signed_in? && current_user.id != 1 %>
-              <%= render 'user/relationships/btn', user: user %>
-            <% end %>
             <% if admin_signed_in? && user.id != 1 %>
               <%= link_to "投稿を見る", admin_user_path(user.id), class: "btn btn-secondary  px-4 btn-sm" %>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button type="button" class="btn btn-danger px-4 btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa-solid fa-user-slash"></i> アカウント削除
               </button>
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
@@ -39,6 +36,9 @@
               </div>
             <% elsif user_signed_in? %>
               <%= link_to "投稿を見る", show_user_path(user.id), class: "btn btn-secondary px-4 btn-sm" %>
+              <% if  current_user.id != 1 %>
+                <%= render 'user/relationships/btn', user: user %>
+              <% end %>
             <% end %>
           </h5>
         </div>

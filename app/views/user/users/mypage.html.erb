@@ -20,20 +20,20 @@
         <%= link_to edit_information_path, class: "btn btn-info px-5" do %>
           <i class="fa-solid fa-user-pen"></i> ユーザー情報編集
         <% end %><br>
-        <%= link_to show_user_path(@user.id), class: "btn btn-secondary" do %>
+        <%= link_to show_user_path(@user.id), class: "btn btn-outline-success" do %>
           <i class="fa-solid fa-list"></i> 投稿履歴
         <% end %><br>
-        <%= link_to posts_favorites_path, class: "btn btn-secondary" do %>
-          <i class="fa-solid fa-bookmark"></i> しおり一覧
+        <%= link_to posts_favorites_path, class: "btn btn-outline-secondary" do %>
+          <i class="fa-solid fa-bookmark"></i> しおりを挟んでいる投稿一覧
         <% end %><br>
-        <%= link_to followings_path(@user.id), class: "btn btn-secondary" do %>
-          <i class="fa-solid fa-star"></i> フォロー一覧
+        <%= link_to followings_path(@user.id), class: "btn btn-outline-info" do %>
+          <i class="fa-solid fa-users"></i> フォローしているユーザー一覧
         <% end %>
       </div>
     </div>
   </div>
   <div class="d-grid d-lg-block text-center mt-3">
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-user-slash"></i> アカウント削除
     </button>
   </div>

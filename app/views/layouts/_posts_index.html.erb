@@ -25,7 +25,7 @@
             積雪の高さ：<%= Post.snow_height_methods.keys[post.snow_height] %><br>
             雪のようす：<%= Post.snow_state_methods.keys[post.snow_state] %><br>
           </p>
-          <div class="col-auto">
+          <div class="col text-end">
             <div class="btn text-secondary">
               <i class="fa-solid fa-comment"></i> <%= post.comments.count %>
             </div>
@@ -37,7 +37,7 @@
                   <%= render 'user/favorites/btn', post: post %>
                 </div>
               <% end %>
-              <%= link_to "詳しく見る", post_path(post.id),'data-turbolinks': false, class: "btn btn-outline-secondary px-4 btn-sm" %>
+              <%= link_to "詳しく見る", post_path(post.id), 'data-turbolinks': false, class: "btn btn-outline-secondary px-4 btn-sm" %>
             <% end %>
           </div>
         </div>

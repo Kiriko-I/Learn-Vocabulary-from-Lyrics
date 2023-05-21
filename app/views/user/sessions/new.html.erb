@@ -20,12 +20,12 @@
     </div>
 
     <div class="col-7 mb-3">
-      <%= f.submit "ログイン", class: "btn btn-info px-4" %>
+      <%= f.submit "ログイン", class: "btn btn-success px-4 btn-sm" %>
     </div>
   <% end %>
 
   <div class="col-7 mb-3">
-    <%= link_to 'ゲストログイン（閲覧用）', user_guest_sign_in_path, class: "btn btn-secondary px-4", method: :post %>
+    <%= link_to 'ゲストログイン（閲覧用）', user_guest_sign_in_path, class: "btn btn-secondary px-4 btn-sm", method: :post %>
   </div>
 
   <%= render "user/shared/links" %>

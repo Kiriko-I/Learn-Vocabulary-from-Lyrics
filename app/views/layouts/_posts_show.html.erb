@@ -46,7 +46,7 @@
                 <% end %>
               <% elsif admin_signed_in? %>
                 <%= link_to admin_post_path(post.id), method: :delete, class: "btn btn-danger" do %>
-                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-trash"></i> 投稿削除
                 <% end %>
               <% end %>
             </div>
@@ -61,7 +61,8 @@
             <% else %>
               <p class="text-secondary mt-5">写真はありません</p>
             <% end %>
-            <% if post.latitude.present? && post.address.present? %>
+            <% if post.latitude.present? %>
+              投稿場所
               <div id="map"></div>
             <% else %>
               <p class="text-secondary mt-5">位置情報はありません</p>
@@ -77,20 +78,18 @@
 </div>
 
 <style>
-#map{
-  height: 300px;
-}
+  #map{
+    height: 300px;
+  }
 </style>
 
-<% if post.latitude.present? && post.address.present? %>
+<% if post.latitude.present? %>
   <script>
-  function initMap() {
-    const mapOptions = {
-      center: { lat: 35.6895, lng: 139.6917 }, // 東京の座標
-      zoom: 15,
-    };
-
-    // if (<%= post.latitude %> && <%= post.longitude %>) {
+    function initMap() {
+      const mapOptions = {
+        center: { lat: 35.6895, lng: 139.6917 }, // 東京の座標
+        zoom: 15,
+      };
       geocoder = new google.maps.Geocoder();
       let map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: <%= post.latitude ||= 0 %>, lng: <%= post.longitude ||= 0 %> },
@@ -100,26 +99,7 @@
         position: { lat: <%= post.latitude ||= 0 %>, lng: <%= post.longitude ||= 0 %> },
         map: map
       });
-    // } else if (post.address.present()) {
-    //   map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    //   var landmark = post.address;
-    //   geocoder = new google.maps.Geocoder();
-    //   geocoder.geocode({ address: landmark }, function(results, status) {
-    //     if (status == 'OK') {
-    //       let location = results[0].geometry.location;
-    //       // lat = location.lat();
-    //       // lng = location.lng();
-    //       // map.setCenter(location);
-    //       marker = new google.maps.Marker({
-    //         map: map,
-    //         position: location
-    //       });
-    //     } else {
-    //       alert('該当する結果がありませんでした：' + status);
-    //     }
-    //   });
-    // }
-  }
+    }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap" async defer></script>
 <% end %>
