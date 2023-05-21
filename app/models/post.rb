@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :snow_image
   validates :message, length: { maximum: 70 }
-  geocoded_by :address
+  geocoded_by :address 
   after_validation :geocode, if: :address_changed?
 
   enum sidewalk_method: {
@@ -13,7 +13,7 @@ class Post < ApplicationRecord
     "２人通れる幅がある　　　　　　　　　": 2,
     "１人しか通れない　　　　　　　　　　": 3,
     "車道を歩くしかない　　　　　　　　　": 4,
-    "どこも歩けない": 5
+    "どこも歩けない　　　　　　　　　　　": 5
   }
   enum snow_height_method: {
     "雪はない　　　　　　": 0,

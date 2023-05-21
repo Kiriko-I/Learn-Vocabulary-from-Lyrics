@@ -3,15 +3,16 @@
     <div class="col">
       <div class="card h-100 border-info">
         <div class="card-header bg-transparent border-info">
-          <% if post.user.profile_image.present? %>
-            <%= image_tag post.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
-          <% else %>
-            <%= image_tag 'snowman.png', size:'50x50' %>
-          <% end %>
           <% if admin_signed_in? && post.user.id != 1 %>
-            <%= link_to post.user.nickname, admin_user_path(post.user.id), class: "text-decoration-none text-secondary h6" %>
+            <%= link_to admin_user_path(post.user.id), class: "text-decoration-none text-secondary h6" do %>
+              <%= image_tag post.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+              <%= post.user.nickname %>
+            <% end %>
           <% elsif user_signed_in? %>
-            <%= link_to post.user.nickname, show_user_path(post.user.id), class: "text-decoration-none text-secondary h6" %>
+            <%= link_to show_user_path(post.user.id), class: "text-decoration-none text-secondary h6" do %>
+              <%= image_tag post.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+              <%= post.user.nickname %>
+            <% end %>
           <% end %>
         </div>
         <div class="card-body">
@@ -24,7 +25,7 @@
             積雪の高さ：<%= Post.snow_height_methods.keys[post.snow_height] %><br>
             雪のようす：<%= Post.snow_state_methods.keys[post.snow_state] %><br>
           </p>
-          <div class="col-auto me-auto">
+          <div class="col-auto">
             <div class="btn text-secondary">
               <i class="fa-solid fa-comment"></i> <%= post.comments.count %>
             </div>

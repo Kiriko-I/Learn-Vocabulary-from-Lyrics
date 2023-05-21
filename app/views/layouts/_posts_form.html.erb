@@ -1,61 +1,80 @@
-<%= form_with model: post, local: true, id: "form" do |f| %>
-  <%= render 'layouts/error_messages', obj: post %>
-  <div class="row">
-    <div class="col-lg-3 mb-3">
-      <label for="prefecture" class="form-label">投稿する都道府県名</label>
-      <%= f.select :prefecture, User.prefecture_methods.map {|k| [k[0], k[1]]}, {}, class: "form-select", id: "prefecture" %>
-    </div>
-    <div class="col-lg-3 mb-3">
-      <label for="city" class="form-label">投稿する市区町村名</label>
-      <%= f.text_field :city, placeholder: "○○市○○区", class: "form-control", id: "city" %>
-    </div>
-    <div class="col-lg-3 mb-3">
-      <label for="landmark" class="form-label">近くの目印になる建物</label>
-      <%= f.text_field :landmark, placeholder: "スーパーやバス停など", class: "form-control", id: "landmark" %>
-    </div>
-    <div class="col-lg-3 mb-3">
-      <label for="snow_image" class="form-label">積もり具合が分かる写真</label>
-      <%= f.file_field :snow_image, class: "form-control", accept: 'image/*', id:"snow_image" %>
-    </div>
-  </div>
-  <div class="row bg-white">
-    <div class="col-lg-3 mb-3">
-      <label for="sidewalk" class="form-label">歩道のようす</label>
-      <div class="form-check text-wrap", style="width: 21rem;">
-        <%= f.collection_radio_buttons :sidewalk, Post.sidewalk_methods.to_a, :second, :first %>
-      </div>
-    </div>
-    <div class="col-lg-3 mb-3">
-      <label for="snow_height" class="form-label">積雪の高さ</label>
-      <div class="form-check", style="width: 13rem;">
-        <%= f.collection_radio_buttons :snow_height, Post.snow_height_methods.to_a, :second, :first %>
-      </div>
-    </div>
-    <div class="col-lg-3 mb-3">
-      <label for="snow_state" class="form-label">雪のようす</label>
-      <div class="form-check", style="width: 13rem;">
-        <%= f.collection_radio_buttons :snow_state, Post.snow_state_methods.to_a, :second, :first %>
-      </div>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="message" class="form-label">メッセージ(70字以内)</label>
-    <%= f.text_area :message, placeholder: "メッセージやアドバイスなどご自由にどうぞ", class: "form-control", id: "message" %>
-  </div>
+<%= render 'layouts/error_messages', obj: post %>
+<div class="card bg-white border-info p-4">
+  <%= form_with model: post, local: true, id: "form" do |f| %>
 
-  <div class="row mb-3">
-    <label for="map" class="form-label">位置情報の登録（任意）</label>
-    <div class="input-group">
-      <%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-outline-primary me-2" %>
-      <input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">
-      <%= button_tag "検索", type: 'button', onclick: "codeAddress()", class: "btn btn-outline-secondary" %>
+    <div class="row">
+      <div class="col-lg-3 mb-3">
+        <label for="prefecture" class="form-label">投稿する都道府県名</label>
+        <%= f.select :prefecture, User.prefecture_methods.map {|k| [k[0], k[1]]}, {}, class: "form-select", id: "prefecture" %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <label for="city" class="form-label">投稿する市区町村名</label>
+        <%= f.text_field :city, placeholder: "○○市○○区", class: "form-control", id: "city" %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <label for="landmark" class="form-label">近くの目印になる建物</label>
+        <%= f.text_field :landmark, placeholder: "スーパーやバス停など", class: "form-control", id: "landmark" %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <label for="snow_image" class="form-label">積もり具合が分かる写真</label>
+        <%= f.file_field :snow_image, class: "form-control", accept: 'image/*', id:"snow_image" %>
+      </div>
     </div>
-    <div id='map'></div>
-  </div>
-  <input type="hidden" id="latitude" value="<%= f.object.latitude %>" />
-  <input type="hidden" id="longitude" value="<%= f.object.longitude %>" />
-  <button type="submit" form= "form" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> 投稿する</button>
-<% end %>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <label for="sidewalk" class="form-label">歩道のようす</label>
+        <div class="form-check text-wrap", style="width: 21rem;">
+          <%= f.collection_radio_buttons :sidewalk, Post.sidewalk_methods.to_a, :second, :first %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <label for="snow_height" class="form-label">積雪の高さ</label>
+        <div class="form-check", style="width: 13rem;">
+          <%= f.collection_radio_buttons :snow_height, Post.snow_height_methods.to_a, :second, :first %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <label for="snow_state" class="form-label">雪のようす</label>
+        <div class="form-check", style="width: 13rem;">
+          <%= f.collection_radio_buttons :snow_state, Post.snow_state_methods.to_a, :second, :first %>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 pt-3">
+      <label for="message" class="form-label">メッセージ(70字以内)</label>
+      <%= f.text_area :message, placeholder: "メッセージやアドバイスなどご自由にどうぞ", class: "form-control", id: "message" %>
+    </div>
+
+    <div class="row">
+      <div class="col mb-3">
+        <label for="map" class="form-label">位置情報</label>
+        <div class="input-group">
+          <label class="me-4">位置情報を登録しますか？</label>
+          <label class="me-4">
+            <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()">はい
+          </label>
+          <label>
+            <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()">いいえ
+          </label>
+        </div>
+        <span id="map-form">
+          <div class="input-group mt-1">
+            <%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-primary me-2 px-4 btn-sm" %>
+            <%= f.text_area :address, class: "form-control", id: "address" %>
+            <!--<input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">-->
+            <%= button_tag "検索", type: 'button', onclick: "codeAddress()", class: "btn btn-secondary px-4 btn-sm" %>
+          </div>
+          <div id='map' class="mt-1"></div>
+          <input type="hidden" id="latitude" value="<%= f.object.latitude %>" />
+          <input type="hidden" id="longitude" value="<%= f.object.longitude %>" />
+        </span>
+      </div>
+    </div>
+
+    <button type="submit" form= "form" class="btn btn-primary px-4"><i class="fa-solid fa-paper-plane"></i> 投稿する</button>
+  <% end %>
+</div>
 
 <style>
   #map{
@@ -64,12 +83,25 @@
 </style>
 
 <script>
+// 位置情報保存の可否
+  let selecterBox = document.getElementById('map-form');
+  function formSwitch() {
+      check = document.getElementsByClassName('js-check')
+      if (check[0].checked) {
+          selecterBox.style.display = "block";
+      } else if (check[1].checked) {
+          selecterBox.style.display = "none";
+      } else {
+          selecterBox.style.display = "none";
+      }
+    }
+    window.addEventListener('load', formSwitch());
+// 位置情報取得
   let map
   let geocoder
   let marker = null
-  // 基準地（東京都）の緯度経度
-  let lat = 35.6894
-  let lng = 139.6917
+  let lat
+  let lng
   <% if post.latitude %>
    lat = <%= post.latitude %>;
   <% end %>
@@ -82,12 +114,13 @@
     // インスタンスの作成
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
-      center: {lat: lat, lng: lng}
+      // 基準地（東京都）の緯度経度
+      center: {lat: 35.6894, lng: 139.6917}
     });
     //初期マーカー
     marker = new google.maps.Marker({
       map: map,
-      position: new google.maps.LatLng(lat, lng),
+      position: new google.maps.LatLng(35.6894, 139.6917),
     });
     document.getElementById("latitude").value = lat;
     document.getElementById("longitude").value = lng;
@@ -150,16 +183,6 @@
     lng = geo.lng();
     document.getElementById("latitude").value = lat;
     document.getElementById("longitude").value = lng;
-    //中心にスクロール
-    /*map.setCenter(geo);
-    //マーカーの更新
-    marker.setMap(null);
-    marker = null;
-    marker = new google.maps.Marker({
-      map: map,
-      position: geo
-    });
-    */
     let location = new google.maps.LatLng(lat, lng)
     marker.setMap(null);
     marker = new google.maps.Marker({

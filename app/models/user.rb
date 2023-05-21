@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-          validates :name, presence: true
-          validates :nickname, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :nickname, presence: true, uniqueness: true
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -32,13 +32,13 @@ class User < ApplicationRecord
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
    }
-   
+
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/snowman.png')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
-    profile_image.variant(resize_to_limit: [50, 50]).processed
+    profile_image.variant(resize_to_fit: [200, 200]).processed
   end
 
   def follow(user)
@@ -59,7 +59,7 @@ class User < ApplicationRecord
       user.name = "guestuser"
     end
   end
-  
+
   def self.search_for(nickname)
     User.where('nickname LIKE ?', "%#{nickname}%")
   end
