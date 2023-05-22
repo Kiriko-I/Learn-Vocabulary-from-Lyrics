@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :snow_image
   validates :message, length: { maximum: 70 }
-  geocoded_by :address 
+  geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
   enum sidewalk_method: {

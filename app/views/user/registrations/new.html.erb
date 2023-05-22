@@ -1,7 +1,6 @@
 <h1>新規会員登録</h1>
 
 <%= render 'layouts/flash' %>
-<!--<%= render 'layouts/error_messages', obj: resource %>-->
 
 <div class="row">
   <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
