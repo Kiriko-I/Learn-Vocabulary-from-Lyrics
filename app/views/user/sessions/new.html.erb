@@ -1,34 +1,41 @@
 <%= render 'layouts/flash' %>
 
-<div class="row text-center">
-  <h1 class="display-4"><strong>雪国で生活するすべての人へ</strong></h1>
-  <p class="lead">
-    冬の朝は雪かきから始まります。<br>
-        
-  </p>
+<div class="top vh-100 d-flex align-items-center" id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto text-center">
+        <h1 class="display-4"><strong>雪国で生活する<br></strong></h1>
+        <h1 class="display-4"><strong>すべての人へ</strong></h1>
+        <p class="lead">
+          冬の朝は雪かきから始まります。<br>
+
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
-
 <h1>ログイン</h1>
+<div id="log-in"></div>
 
 <div class="row">
   <%= form_with model: @user, url: user_session_path, local: true do |f| %>
     <%= render 'layouts/error_messages', obj: @user %>
-    <div class="col-7 mb-3">
+    <div class="col-7 mb-3 mx-auto">
       <label for="email" class="form-label">メールアドレス</label>
       <%= f.email_field :email, placeholder: "name@example.com", class: "form-control", id: "email" %>
     </div>
-    <div class="col-7 mb-3">
+    <div class="col-7 mb-3 mx-auto">
       <label for="password" class="form-label">パスワード</label>
       <%= f.password_field :password, class: "form-control", id: "password" %>
     </div>
 
-    <div class="col-7 mb-3">
+    <div class="mb-3 text-center">
       <%= f.submit "ログイン", class: "btn btn-success px-4 btn-sm" %>
     </div>
   <% end %>
 
-  <div class="col-7 mb-3">
+  <div class="mb-3 text-center">
     <%= link_to 'ゲストログイン（閲覧用）', user_guest_sign_in_path, class: "btn btn-secondary px-4 btn-sm", method: :post %>
   </div>
 

@@ -19,8 +19,8 @@
 
   <body>
     <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %> sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand-xl navbar-light bg-light p-3">
+        <div class="container">
           <%= link_to (admin_signed_in? ? admin_root_path : new_user_session_path ), class: "navbar-brand" do %>
             <%= image_tag 'yukiguni.png', size: '248x54' %>
           <% end %>
@@ -71,7 +71,7 @@
               <% end %>
             <% else %>
               <form class="ms-auto">
-                <%= link_to new_user_session_path, class: "btn btn-success ms-2" do %>
+                <%= link_to '#log-in', class: "btn btn-success ms-2" do %>
                   <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i> ログイン
                 <% end %>
                 <%= link_to new_user_registration_path, class: "btn btn-primary ms-2" do %>
