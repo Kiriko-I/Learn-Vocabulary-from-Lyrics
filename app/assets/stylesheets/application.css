@@ -18,11 +18,25 @@ label {
   background-color: white;
 }
 
-/*.nav-item {*/
-/* padding-top: 16px;*/
-/*}*/
-
+/*トップページ（ログインページの背景デザイン）*/
 .top {
+  height: 750px;
   display: flex;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/*ヘッダーの新規投稿・投稿一覧ボタンの配置調整（レスポンシブ対応）*/
+.header-button {
+  margin-top: 22px;
+}
+
+@media (max-width: 1200px) {
+  .header-button {
+    margin-top: 0;
+  }
+}
+
+/*トップページ内のログインリンク先のフォーム位置調整*/
+#log-in-form {
+  margin-top: 100px;
 }
