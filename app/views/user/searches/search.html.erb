@@ -1,7 +1,11 @@
-<% if @model == 'post' %>
-	<h1><%= User.prefecture_methods.keys[@prefecture.to_i] %> <%= @city %> の検索結果</h1>
-  <%= render 'layouts/posts_index', posts: @posts %>
-<% elsif @model == 'user' %>
-	<h1><%= @nickname %> さんの検索結果</h1>
-  <%= render 'layouts/users_index', users: @users %>
-<% end %>
+<div class="container">
+  
+  <% if @model == 'post' %>
+  	<h1><%= User.prefecture_methods.keys[@prefecture.to_i] %> <%= @city %> の検索結果</h1>
+    <%= render 'layouts/posts_index', posts: @posts %>
+  <% elsif @model == 'user' %>
+  	<h1><%= @nickname %> さんの検索結果</h1>
+    <%= render 'layouts/users_index', users: @users %>
+  <% end %>
+  
+</div>

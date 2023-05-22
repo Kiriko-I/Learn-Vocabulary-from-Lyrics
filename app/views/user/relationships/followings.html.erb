@@ -1,7 +1,11 @@
-<h1>フォロー一覧</h1>
+<div class="container">
 
-<% if @users.present? %>
-  <%= render 'layouts/users_index', users: @users %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+  <h1>フォロー一覧</h1>
+  
+  <% if @users.present? %>
+    <%= render 'layouts/users_index', users: @users %>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+
+</div>

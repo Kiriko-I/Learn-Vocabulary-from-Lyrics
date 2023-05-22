@@ -1,5 +1,9 @@
-<h1><%= User.prefecture_methods.keys[current_user.prefecture] %>の投稿一覧</h1>
+<div class="container">
 
-<%= render 'layouts/flash' %>
-
-<%= render "layouts/posts_index", posts: @posts %>
+  <h1><%= User.prefecture_methods.keys[current_user.prefecture] %>の投稿一覧</h1>
+  
+  <%= render 'layouts/flash' %>
+  
+  <%= render "layouts/posts_index", posts: @posts %>
+  
+</div>

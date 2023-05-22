@@ -1,5 +1,9 @@
-<h1>投稿詳細</h1>
+<div class="container">
 
-<%= render 'layouts/flash' %>
+  <h1>投稿詳細</h1>
+  
+  <%= render 'layouts/flash' %>
+  
+  <%= render 'layouts/posts_show', post: @post, comment: @comment %>
 
-<%= render 'layouts/posts_show', post: @post, comment: @comment %>
+</div
