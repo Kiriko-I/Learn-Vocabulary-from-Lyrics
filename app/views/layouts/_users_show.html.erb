@@ -9,7 +9,7 @@
             <small>
               登録：<%= User.prefecture_methods.keys[user.prefecture] %>
             </small>
-            <% if user_signed_in? && current_user.id != 1 %>
+            <% if user_signed_in? %>
               <%= render 'user/relationships/btn', user: user %>
             <% end %>
           </div>
@@ -45,11 +45,9 @@
               <% if admin_signed_in? %>
                 <%= link_to "詳しく見る", admin_post_path(post.id),'data-turbolinks': false, class: "btn btn-secondary px-4 btn-sm" %>
               <% else %>
-                <% if current_user.id != 1 %>
-                  <div id="favorite-<%= post.id %>" class="btn">
-                    <%= render 'user/favorites/btn', post: post %>
-                  </div>
-                <% end %>
+                <div id="favorite-<%= post.id %>" class="btn">
+                  <%= render 'user/favorites/btn', post: post %>
+                </div>
                 <%= link_to "詳しく見る", post_path(post.id), 'data-turbolinks': false, class: "btn btn-outline-secondary px-4 btn-sm" %>
               <% end %>
             </div>

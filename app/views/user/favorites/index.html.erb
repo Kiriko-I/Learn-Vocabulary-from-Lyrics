@@ -1,11 +1,11 @@
 <div class="container">
 
   <h1>しおりを挟んでいる投稿一覧</h1>
-  
+
   <% if @posts.present? %>
     <%= render 'layouts/posts_index', posts: @posts %>
   <% else %>
-    <p>しおりはありません</p>
+    <p>しおりを挟んでいる投稿はありません。</p>
   <% end %>
-  
+
 </div

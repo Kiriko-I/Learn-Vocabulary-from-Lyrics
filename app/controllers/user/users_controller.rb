@@ -1,6 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user, only: [:mypage, :edit]
+  before_action :ensure_guest_user, only: [:edit, :update, :destroy]
 
   def mypage
     @user = current_user
@@ -41,9 +41,9 @@ class User::UsersController < ApplicationController
 
   def ensure_guest_user
     @user = current_user
-    if @user.name == "guestuser"
+    if @user.id == 1
       @user = current_user
-      flash[:alert] = 'ゲストはプロフィール画面へ遷移できません。'
+      flash[:danger] = 'ゲストはプロフィールを編集できません。'
       redirect_to posts_path
     end
   end

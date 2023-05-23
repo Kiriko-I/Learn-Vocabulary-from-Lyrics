@@ -1,22 +1,26 @@
-<h1>管理者ログイン</h1>
+<div class="container">
 
-<%= render 'layouts/flash' %>
+  <h1>管理者ログイン</h1>
 
-<div class="row">
-  <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
-    <%= render 'layouts/error_messages', obj: @admin %>
-    <div class="col-7 mb-3 mx-auto">
-      <label for="email" class="form-label">メールアドレス</label>
-      <%= f.email_field :email, placeholder: "name@example.com", class: "form-control", id: "email" %>
-    </div>
-    <div class="col-7 mb-3 mx-auto">
-      <label for="password" class="form-label">パスワード</label>
-      <%= f.password_field :password, class: "form-control", id: "password" %>
-    </div>
+  <%= render 'layouts/flash' %>
 
-    <div class="mb-3 text-center">
-      <%= f.submit "ログイン", class: "btn btn-info px-4 btn-sm" %>
-    </div>
-  <% end %>
-  <%= render "admin/shared/links" %>
+  <div class="row">
+    <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
+      <%= render 'layouts/error_messages', obj: @admin %>
+      <div class="col-7 mb-3 mx-auto">
+        <label for="email" class="form-label">メールアドレス</label>
+        <%= f.email_field :email, placeholder: "name@example.com", class: "form-control", id: "email" %>
+      </div>
+      <div class="col-7 mb-3 mx-auto">
+        <label for="password" class="form-label">パスワード</label>
+        <%= f.password_field :password, class: "form-control", id: "password" %>
+      </div>
+
+      <div class="mb-3 text-center">
+        <%= f.submit "ログイン", class: "btn btn-info px-4 btn-sm" %>
+      </div>
+    <% end %>
+    <%= render "admin/shared/links" %>
+  </div>
+
 </div>

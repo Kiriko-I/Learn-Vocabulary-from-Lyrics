@@ -18,7 +18,7 @@
   </li>
 
 <% elsif admin_signed_in? %>
-  <li class="nav-item col-xl-6">
+  <li class="nav-item col-xl-7">
     <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
       <div class="input-group mb-2">
         <%= f.select :prefecture, User.prefecture_methods.map {|k| [k[0], k[1]]}, {}, class: "btn btn-outline-secondary dropdown-toggle" %>

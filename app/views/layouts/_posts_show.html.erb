@@ -2,7 +2,7 @@
   <div class="col">
     <div class="card border-info">
       <div class="card-header bg-transparent border-info">
-        <% if admin_signed_in? && post.user.id != 1 %>
+        <% if admin_signed_in? %>
           <%= link_to admin_user_path(post.user.id), class: "text-decoration-none text-secondary h6" do %>
             <%= image_tag post.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
             <%= post.user.nickname %>
@@ -31,11 +31,9 @@
             </p>
             <div class="mb-3">
               <% if user_signed_in? %>
-                <% if current_user.id != 1 %>
-                  <div id="favorite-<%= post.id %>" class="btn">
-                    <%= render 'user/favorites/btn', post: post %>
-                  </div>
-                <% end %>
+                <div id="favorite-<%= post.id %>" class="btn">
+                  <%= render 'user/favorites/btn', post: post %>
+                </div>
                 <% if post.user == current_user %>
                   <%= link_to edit_post_path(post.id), 'data-turbolinks': false, class: "btn btn-secondary" do %>
                     <i class="fa-solid fa-pen-to-square"></i> 編集する
@@ -57,6 +55,7 @@
           </div>
           <div class="col-5">
             <% if post.snow_image.present? %>
+              投稿場所のようす
               <%= image_tag post.snow_image, class: "card-img" %>
             <% else %>
               <p class="text-secondary mt-5">写真はありません</p>

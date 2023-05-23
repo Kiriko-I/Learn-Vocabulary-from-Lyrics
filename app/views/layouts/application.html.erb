@@ -48,10 +48,8 @@
             <% elsif user_signed_in? %>
               <ul class="navbar-nav ms-auto">
                 <li class="header-button nav-item me-2 mb-2">
-                  <% if current_user.id != 1 %>
-                    <%= link_to new_post_path, 'data-turbolinks': false, class: "btn btn-outline-success mt-3 mt-xl-0" do %>
-                      <i class="fa-solid fa-snowflake fa-xl"></i> 投稿する <i class="fa-solid fa-snowflake fa-xl"></i>
-                    <% end %>
+                  <%= link_to new_post_path, 'data-turbolinks': false, class: "btn btn-outline-success mt-3 mt-xl-0" do %>
+                    <i class="fa-solid fa-snowflake fa-xl"></i> 投稿する <i class="fa-solid fa-snowflake fa-xl"></i>
                   <% end %>
                 </li>
                 <li class="header-button nav-item me-2 mb-2">
@@ -61,20 +59,18 @@
                 </li>
                 <%= render 'layouts/search_form' %>
               </ul>
-              <% if current_user.id != 1 %>
-                <%= link_to mypage_path, class: "btn btn-outline-info ms-2" do %>
-                  <i class="fa-solid fa-user-gear fa-xl"></i>
-                <% end %>
+              <%= link_to mypage_path, class: "btn btn-outline-info ms-2" do %>
+                <i class="fa-solid fa-user-gear fa-xl"></i>
               <% end %>
               <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-warning ms-2" do %>
                 <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
               <% end %>
             <% else %>
               <form class="navbar-nav ms-auto">
-                <%= link_to '#log-in', class: "btn btn-outline-success ms-2" do %>
+                <%= link_to '#log-in', class: "btn btn-outline-success ms-2 my-2 my-lg-0" do %>
                   <i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i> ログイン
                 <% end %>
-                <%= link_to new_user_registration_path, class: "btn btn-outline-primary ms-2" do %>
+                <%= link_to new_user_registration_path, class: "btn btn-outline-primary ms-2 mb-2 mb-lg-0" do %>
                   <i class="fa-solid fa-user-plus fa-xl"></i> 新規登録
                 <% end %>
               </form>
@@ -84,11 +80,11 @@
       </nav>
     </header>
 
-    <div style="padding-bottom: 50px">
+    <div style="padding-bottom: 20px">
       <%= yield %>
     </div>
 
-    <footer class="fixed-bottom text-center bg-light">
+    <footer class="fixed-bottom text-center bg-light m-0.5">
       <div>
         <%= link_to "管理者ログインはこちら", new_admin_session_path %>
       </div>

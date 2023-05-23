@@ -20,9 +20,9 @@ label {
 
 /*トップページ（ログインページの背景デザイン）*/
 .top {
-  height: 750px;
+  height: 650px;
   display: flex;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 /*ヘッダーの新規投稿・投稿一覧ボタンの配置調整（レスポンシブ対応）*/

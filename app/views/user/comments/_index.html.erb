@@ -4,30 +4,36 @@
       <i class="fa-solid fa-comment"></i> <%= post.comments.count %> コメント
     </thead>
     <tbody>
-      <% post.comments.each do |comment| %>
-        <tr>
-          <td>
-            <% if admin_signed_in? && comment.user.id != 1 %>
-              <%= link_to admin_user_path(comment.user.id), class: "text-decoration-none text-secondary h6" do %>
-                <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
-                <%= comment.user.nickname %>
+      <% if post.comments.present? %>
+        <% post.comments.each do |comment| %>
+          <tr>
+            <td>
+              <% if admin_signed_in? && comment.user.id != 1 %>
+                <%= link_to admin_user_path(comment.user.id), class: "text-decoration-none text-secondary h6" do %>
+                  <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+                  <%= comment.user.nickname %>
+                <% end %>
+              <% elsif user_signed_in? %>
+                <%= link_to show_user_path(comment.user.id), class: "text-decoration-none text-secondary h6" do %>
+                  <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+                  <%= comment.user.nickname %>
+                <% end %>
               <% end %>
-            <% elsif user_signed_in? %>
-              <%= link_to show_user_path(comment.user.id), class: "text-decoration-none text-secondary h6" do %>
-                <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
-                <%= comment.user.nickname %>
+            </td>
+            <td><%= comment.comment %></td>
+            <td>
+              <% if comment.user == current_user %>
+                <%= link_to "コメント削除", post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-4 btn-sm pull-right", remote: false %>
+              <% elsif admin_signed_in? %>
+                <%= link_to "コメント削除", admin_post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-4 btn-sm pull-right", remote: false %>
               <% end %>
-            <% end %>
-          </td>
-          <td><%= comment.comment %></td>
-          <td>
-            <% if comment.user == current_user %>
-              <%= link_to "コメント削除", post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-4 btn-sm pull-right", remote: false %>
-            <% elsif admin_signed_in? %>
-              <%= link_to "コメント削除", admin_post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-4 btn-sm pull-right", remote: false %>
-            <% end %>
-          </td>
-        </tr>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <div>
+          まだコメントはありません。
+        </div>
       <% end %>
     </tbody>
   </table>

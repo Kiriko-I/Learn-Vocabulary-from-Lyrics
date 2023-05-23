@@ -1,20 +1,24 @@
-<h1>管理者トップページ</h1>
-
-<div class="row row-cols-2 g-4">
-  <div class="col">
-    <div class="card text-center">
-      <%= link_to admin_posts_path, class: "text-dark nav-link" do %>
-         <i class="fa-solid fa-shoe-prints fa-4x mb-3"></i><br>
-         投稿一覧
-      <% end %>
+<div class="container">
+  
+  <h1>管理者トップページ</h1>
+  
+  <div class="row row-cols-2 g-4">
+    <div class="col">
+      <div class="card text-center">
+        <%= link_to admin_posts_path, class: "text-dark nav-link" do %>
+           <i class="fa-solid fa-shoe-prints fa-4x mb-3"></i><br>
+           投稿一覧
+        <% end %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-center">
+        <%= link_to admin_users_path, class: "text-dark nav-link" do %>
+          <i class="fa-solid fa-users fa-4x mb-3"></i><br>
+          ユーザー一覧
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card text-center">
-      <%= link_to admin_users_path, class: "text-dark nav-link" do %>
-        <i class="fa-solid fa-users fa-4x mb-3"></i><br>
-        ユーザー一覧
-      <% end %>
-    </div>
-  </div>
+  
 </div>
