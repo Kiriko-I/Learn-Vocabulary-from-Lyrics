@@ -12,7 +12,7 @@
               </small>
               <% if admin_signed_in? %>
                 <%= link_to "投稿を見る", admin_user_path(user.id), class: "btn btn-secondary  px-4 btn-sm" %>
-                <% if user.id != 1 %>
+                <% if user.name != 'guestuser' %>
                   <button type="button" class="btn btn-danger px-4 btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa-solid fa-user-slash"></i> アカウント削除
                   </button>
