@@ -41,7 +41,7 @@ class User::UsersController < ApplicationController
 
   def ensure_guest_user
     @user = current_user
-    if @user.id == 1
+    if @user.name == 'guestuser'
       @user = current_user
       flash[:danger] = 'ゲストはプロフィールを編集できません。'
       redirect_to posts_path

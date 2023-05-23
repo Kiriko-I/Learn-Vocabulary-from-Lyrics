@@ -9,7 +9,7 @@
           <h5 class="card-title">
             <%= image_tag @user.get_profile_image, size:'50x50', class: "rounded-circle" %>
             <%= @user.nickname %>
-            <%= @user.prefecture %>
+            <%= User.prefecture_methods.keys[@user.prefecture] %>
             <% if admin_signed_in? && @user.name != 'guestuser' %>
               <button type="button" class="btn btn-danger px-4 btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa-solid fa-trash"></i> アカウント削除
