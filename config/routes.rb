@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'comments/destroy'
-  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
   devise_for :user, skip: [:sessions, :passwords], controllers: {
     registrations: "user/registrations",
-    # sessions: 'user/sessions'
   }
+  # ログインページをトップページにするためにスコープで記述
   devise_scope :user do
     get '/' => 'user/sessions#new', as: 'new_user_session'
     post 'user/sign_in' => 'user/sessions#create', as: 'user_session'
@@ -20,6 +17,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get 'search' => 'searches#search'
+    get 'comments/destroy'
     resources :users, only: [:index, :show, :destroy]
     resources :posts, only: [:index, :show, :destroy] do
       delete '/comments/:id' => 'comments#destroy', as: 'comment'
@@ -27,7 +25,6 @@ Rails.application.routes.draw do
   end
 
   scope module: :user do
-    # get '/map_request', to: 'posts#map', as: 'map_request'
     get 'search' => 'searches#search'
     get 'posts/favorites' => 'favorites#index'
     get 'users/mypage' => 'users#mypage', as: 'mypage'
