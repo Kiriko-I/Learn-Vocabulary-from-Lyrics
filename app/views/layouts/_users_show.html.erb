@@ -1,0 +1,66 @@
+<div class="row row-cols-1 g-4 mb-3">
+  <div class="col">
+    <div class="card h-100 border-info mx-auto">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= image_tag user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+          <%= user.nickname %>
+          <div class="text-end">
+            <small>
+              登録：<%= User.prefecture_methods.keys[user.prefecture] %>
+            </small>
+            <% if user_signed_in? && current_user.id != 1 %>
+              <%= render 'user/relationships/btn', user: user %>
+            <% end %>
+          </div>
+        </h5>
+        <% if admin_signed_in? && user.id != 1 %>
+          <%= link_to admin_user_path(user.id), method: :delete, class: "btn btn-outline-danger" do %>
+            <i class="fa-solid fa-trash"></i> ユーザーを削除する
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% if posts.present? %>
+  <div class="row row-cols-1 row-cols-lg-4 g-4">
+    <% posts.each do |post| %>
+      <div class="col">
+        <div class="card h-100 border-info">
+          <div class="card-body">
+            <h5 class="card-title"><%= User.prefecture_methods.keys[post.prefecture] %> <%= post.city %></h5>
+            <p class="card-text">
+              <% if post.landmark.present? %>
+                近くの建物：<%= post.landmark %><br>
+              <% end %>
+              歩道のようす：<%= Post.sidewalk_methods.keys[post.sidewalk] %><br>
+              積雪の高さ：<%= Post.snow_height_methods.keys[post.snow_height] %><br>
+              雪のようす：<%= Post.snow_state_methods.keys[post.snow_state] %><br>
+            </p>
+            <div class="col text-end">
+              <div class="btn text-secondary">
+                <i class="fa-solid fa-comment"></i> <%= post.comments.count %>
+              </div>
+              <% if admin_signed_in? %>
+                <%= link_to "詳しく見る", admin_post_path(post.id),'data-turbolinks': false, class: "btn btn-secondary px-4 btn-sm" %>
+              <% else %>
+                <% if current_user.id != 1 %>
+                  <div id="favorite-<%= post.id %>" class="btn">
+                    <%= render 'user/favorites/btn', post: post %>
+                  </div>
+                <% end %>
+                <%= link_to "詳しく見る", post_path(post.id), 'data-turbolinks': false, class: "btn btn-outline-secondary px-4 btn-sm" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-info">
+            <small class="text-muted"><i class="fa-solid fa-calendar-days"></i> 投稿日時：<%= l post.created_at %></small>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  投稿はありません。
+<% end %>

@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col">
+    <div class="card border-info">
+      <div class="card-header bg-transparent border-info">
+        <% if admin_signed_in? && post.user.id != 1 %>
+          <%= link_to admin_user_path(post.user.id), class: "text-decoration-none text-secondary h6" do %>
+            <%= image_tag post.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+            <%= post.user.nickname %>
+          <% end %>
+        <% elsif user_signed_in? %>
+          <%= link_to show_user_path(post.user.id), class: "text-decoration-none text-secondary h6" do %>
+            <%= image_tag post.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+            <%= post.user.nickname %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <div class="row g-0">
+          <div class="col-7">
+            <h5 class="card-title"><%= User.prefecture_methods.keys[post.prefecture] %> <%= post.city %></h5>
+            <p class="card-text">
+              <% if post.landmark.present? %>
+                近くの建物：<%= post.landmark %><br>
+              <% end %>
+              歩道のようす：<%= Post.sidewalk_methods.keys[post.sidewalk] %><br>
+              積雪の高さ：<%= Post.snow_height_methods.keys[post.snow_height] %><br>
+              雪のようす：<%= Post.snow_state_methods.keys[post.snow_state] %><br>
+              <% if post.message.present? %>
+                メッセージ：<%= post.message %>
+              <% end %>
+            </p>
+            <div class="mb-3">
+              <% if user_signed_in? %>
+                <% if current_user.id != 1 %>
+                  <div id="favorite-<%= post.id %>" class="btn">
+                    <%= render 'user/favorites/btn', post: post %>
+                  </div>
+                <% end %>
+                <% if post.user == current_user %>
+                  <%= link_to edit_post_path(post.id), 'data-turbolinks': false, class: "btn btn-secondary" do %>
+                    <i class="fa-solid fa-pen-to-square"></i> 編集する
+                  <% end %>
+                  <%= link_to post_path(post.id), method: :delete, class: "btn btn-danger" do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                <% end %>
+              <% elsif admin_signed_in? %>
+                <%= link_to admin_post_path(post.id), method: :delete, class: "btn btn-danger" do %>
+                  <i class="fa-solid fa-trash"></i> 投稿削除
+                <% end %>
+              <% end %>
+            </div>
+            <%= render 'user/comments/index', post: post %>
+            <% if user_signed_in? %>
+              <%= render 'user/comments/form', post: post, comment: comment %>
+            <% end %>
+          </div>
+          <div class="col-5">
+            <% if post.snow_image.present? %>
+              <%= image_tag post.snow_image, class: "card-img" %>
+            <% else %>
+              <p class="text-secondary mt-5">写真はありません</p>
+            <% end %>
+            <% if post.latitude.present? %>
+              投稿場所
+              <div id="map"></div>
+            <% else %>
+              <p class="text-secondary mt-5">位置情報はありません</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-transparent border-info">
+        <small class="text-muted">投稿日時：<%= l post.created_at, format: :long %></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #map{
+    height: 300px;
+  }
+</style>
+
+<% if post.latitude.present? %>
+  <script>
+    function initMap() {
+      const mapOptions = {
+        center: { lat: 35.6895, lng: 139.6917 }, // 東京の座標
+        zoom: 15,
+      };
+      geocoder = new google.maps.Geocoder();
+      let map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: <%= post.latitude ||= 0 %>, lng: <%= post.longitude ||= 0 %> },
+        zoom: 15
+      });
+      marker = new google.maps.Marker({
+        position: { lat: <%= post.latitude ||= 0 %>, lng: <%= post.longitude ||= 0 %> },
+        map: map
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap" async defer></script>
+<% end %>

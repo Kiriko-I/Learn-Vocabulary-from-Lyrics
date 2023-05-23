@@ -1,0 +1,48 @@
+<div class="row row-cols-1 g-4">
+  <% users.each do |user| %>
+    <div class="col">
+      <div class="card h-100 border-info mx-auto">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= image_tag user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+            <%= user.nickname %>
+            <small>
+              登録：<%= User.prefecture_methods.keys[user.prefecture] %>
+            </small>
+            <% if admin_signed_in? && user.id != 1 %>
+              <%= link_to "投稿を見る", admin_user_path(user.id), class: "btn btn-secondary  px-4 btn-sm" %>
+              <button type="button" class="btn btn-danger px-4 btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-user-slash"></i> アカウント削除
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">アカウント削除確認</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        本当に削除してよろしいですか？<br>
+                        アカウント情報は削除され、元に戻すことはできません。
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                      <%= link_to "削除", admin_user_path(user.id), method: :delete, class: "btn btn-danger" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% elsif user_signed_in? %>
+              <%= link_to "投稿を見る", show_user_path(user.id), class: "btn btn-secondary px-4 btn-sm" %>
+              <% if  current_user.id != 1 %>
+                <%= render 'user/relationships/btn', user: user %>
+              <% end %>
+            <% end %>
+          </h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

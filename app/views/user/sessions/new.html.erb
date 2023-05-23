@@ -1,0 +1,75 @@
+<%= render 'layouts/flash' %>
+
+<div class="top d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto text-center">
+        <h1 class="display-4"><strong>雪道を歩く<br></strong></h1>
+        <h1 class="display-4"><strong>すべての人へ</strong></h1>
+        <p class="lead mt-3">
+          雪の積もる季節に<br>歩きやすい道・歩きにくい道を<br>共有するためのウェブサイトです。
+        </p>
+        <a href="#about" class="text-decoration-none">アプリの使い方はこちらから</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="log-in"></div>
+<div class="container my-5">
+  <h1 id="log-in-form">ログイン</h1>
+  <div class="row">
+    <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+      <%= render 'layouts/error_messages', obj: @user %>
+      <div class="col-7 mb-3 mx-auto">
+        <label for="email" class="form-label">メールアドレス</label>
+        <%= f.email_field :email, placeholder: "name@example.com", class: "form-control", id: "email" %>
+      </div>
+      <div class="col-7 mb-3 mx-auto">
+        <label for="password" class="form-label">パスワード</label>
+        <%= f.password_field :password, class: "form-control", id: "password" %>
+      </div>
+      <div class="mb-3 text-center">
+        <%= f.submit "ログイン", class: "btn btn-success px-4 btn-sm" %>
+      </div>
+    <% end %>
+    <div class="mb-3 text-center">
+      <%= link_to 'ゲストログイン（閲覧用）', user_guest_sign_in_path, class: "btn btn-secondary px-4 btn-sm", method: :post %>
+    </div>
+    <%= render "user/shared/links" %>
+  </div>
+</div>
+
+<div class="top d-flex align-items-center">
+  <div class="container" id="about">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <h1 class="display-6"><strong>このアプリでできること</strong></h1>
+        <ol class="list-group list-group-numbered list-group-flush lead">
+          <li class="list-group-item bg-transparent">
+            歩道の除雪状況をリアルタイムでチェック<br>
+            　　雪かきをした道や歩きやすい歩道など、<br>
+            　　歩行者のための情報を共有しましょう。<br>
+            　　ログイン後のトップページでは、<br>
+            　　登録した都道府県の投稿一覧が表示されます。
+          </li>
+          <li class="list-group-item bg-transparent">
+            地元の様子を共有<br>
+            　　アプリ上で写真やコメントを投稿し、<br>
+            　　地元の様子を共有しましょう。<br>
+            　　雪の状態や歩行者向けのルート情報など、<br>
+            　　投稿へのコメントも他のユーザーに役立ちます。<br>
+            　　投稿にはしおりをつけて見返すこともできます。
+          </li>
+          <li class="list-group-item bg-transparent">
+            全国の投稿も見てみよう<br>
+            　　投稿検索・ユーザー検索から、<br>
+            　　全国の様子も見ることができます。<br>
+            　　ほかのユーザーをフォローすることで、<br>
+            　　同じ生活圏の様子をチェックしやすくなります。
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>

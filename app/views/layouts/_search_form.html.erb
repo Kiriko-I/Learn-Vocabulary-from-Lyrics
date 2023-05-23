@@ -1,0 +1,38 @@
+<% if user_signed_in? %>
+  <li class="nav-item col-xl-7">
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <div class="input-group mb-2">
+        <%= f.select :prefecture, User.prefecture_methods.map {|k| [k[0], k[1]]}, {}, class: "btn btn-outline-secondary dropdown-toggle" %>
+        <%= f.text_field :city, placeholder: "○○市○○区", class: "form-control" %>
+        <%= f.hidden_field :model, :value => 'post' %>
+        <%= f.submit '　投稿検索　', class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <div class="input-group mb-2 mb-xl-0">
+        <%= f.text_field :nickname, placeholder: "ユーザー名", class: "form-control", type: "text" %>
+        <%= f.hidden_field :model, :value => 'user' %>
+        <%= f.submit 'ユーザー検索', class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </li>
+
+<% elsif admin_signed_in? %>
+  <li class="nav-item col-xl-6">
+    <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+      <div class="input-group mb-2">
+        <%= f.select :prefecture, User.prefecture_methods.map {|k| [k[0], k[1]]}, {}, class: "btn btn-outline-secondary dropdown-toggle" %>
+        <%= f.text_field :city, placeholder: "○○市○○区", class: "form-control" %>
+        <%= f.hidden_field :model, :value => 'post' %>
+        <%= f.submit '　投稿検索　', class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+    <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+      <div class="input-group mb-2 mb-xl-0">
+        <%= f.text_field :nickname, placeholder: "ユーザー名", class: "form-control", type: "text" %>
+        <%= f.hidden_field :model, :value => 'user' %>
+        <%= f.submit 'ユーザー検索', class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </li>
+<% end %>

@@ -1,15 +1,42 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+body {
+  background-color: #A2C8C9;
+  background-image: url('illustration.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
+  color: #6c757d;
+  font-family: 'Sawarabi Gothic', Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  letter-spacing: 0.2em;
+  background: linear-gradient(transparent 70%, #F29A72 50%);
+}
+
+label {
+  background-color: white;
+}
+
+/*トップページ（ログインページの背景デザイン）*/
+.top {
+  height: 750px;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/*ヘッダーの新規投稿・投稿一覧ボタンの配置調整（レスポンシブ対応）*/
+.header-button {
+  margin-top: 22px;
+}
+
+@media (max-width: 1200px) {
+  .header-button {
+    margin-top: 0;
+  }
+}
+
+/*トップページ内のログインリンク先のフォーム位置調整*/
+#log-in-form {
+  margin-top: 100px;
+}
