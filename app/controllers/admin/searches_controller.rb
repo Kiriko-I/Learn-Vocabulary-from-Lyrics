@@ -1,5 +1,5 @@
 class Admin::SearchesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_admin_user!
 
 	def search
 	  @model = params[:model]
@@ -12,5 +12,5 @@ class Admin::SearchesController < ApplicationController
 		  @users = User.search_for(@nickname).order(created_at: :desc)
 		end
 	end
-	
+
 end
