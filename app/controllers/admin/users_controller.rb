@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_admin_user!
+  before_action :authenticate_admi!
 
   def show
     @user = User.find(params[:id])
