@@ -39,7 +39,9 @@
                 <% end %>
               <% elsif user_signed_in? %>
                 <%= link_to "投稿を見る", show_user_path(user.id), class: "btn btn-secondary px-4 btn-sm" %>
-                <%= render 'user/relationships/btn', user: user %>
+                <div id="follow-<%= user.id %>" class="btn">
+                  <%= render 'user/relationships/btn', user: user %>
+                </div>
               <% end %>
             </h5>
           </div>

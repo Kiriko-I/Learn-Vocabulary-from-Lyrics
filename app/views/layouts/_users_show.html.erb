@@ -10,7 +10,9 @@
               登録：<%= User.prefecture_methods.keys[user.prefecture] %>
             </small>
             <% if user_signed_in? %>
-              <%= render 'user/relationships/btn', user: user %>
+              <div id="follow-<%= user.id %>" class="btn">
+                <%= render 'user/relationships/btn', user: user %>
+              </div>
             <% end %>
           </div>
         </h5>
