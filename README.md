@@ -21,8 +21,7 @@
 - 歩道が雪で埋まっていて危ないと思った時。また、それが解消された時。
 
 ## 設計書
-- [画面遷移図](https://drive.google.com/file/d/1o-_HMZy20PZDmYV_xZW-TUXjCTH_Wu1s/view?usp=sharing)
-- [ER図](https://drive.google.com/file/d/1o-_HMZy20PZDmYV_xZW-TUXjCTH_Wu1s/view?usp=sharing)
+- [画面遷移図、ER図、一部ワイヤーフレーム](https://drive.google.com/file/d/1o-_HMZy20PZDmYV_xZW-TUXjCTH_Wu1s/view?usp=sharing) diagrams.netで開くとすべてご覧いただけます。
 - [テーブル定義書/アプリケーション詳細設計](https://docs.google.com/spreadsheets/d/1nCQMOcZfB6MRlgjYw5S_cLqOdsqPDq8ahVXY-lFR64s/edit?usp=sharing)
 
 ## 開発環境
