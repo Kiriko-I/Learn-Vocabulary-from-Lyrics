@@ -1,10 +1,10 @@
 <% if current_user != user && user.name != "guestuser" %>
   <% if current_user.following?(user) %>
-    <%= link_to destroy_relationship_path(user.id), method: :delete, class: "btn btn-warning px-4 btn-sm" do %>
+    <%= link_to destroy_relationship_path(user.id), method: :delete, remote: true, class: "btn btn-warning px-4 btn-sm" do %>
       <i class="fa-solid fa-person-circle-minus"></i> フォロー解除
     <% end %>
   <% else %>
-    <%= link_to  create_relationship_path(user.id), method: :post, class: "btn btn-info px-4 btn-sm" do %>
+    <%= link_to  create_relationship_path(user.id), method: :post, remote: true, class: "btn btn-info px-4 btn-sm" do %>
       <i class="fa-solid fa-person-circle-plus"></i> フォローする
     <% end %>
   <% end %>
