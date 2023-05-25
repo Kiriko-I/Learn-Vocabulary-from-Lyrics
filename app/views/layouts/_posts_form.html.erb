@@ -60,7 +60,9 @@
         <span id="map-form">
           <label for="map" class="form-label">位置情報</label>
           <div class="input-group mt-1">
-            <%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-primary me-2 px-4 btn-sm" %>
+            <!--HTTP通信ではAPIで現在地を取得できないため、ボタンを非表示としています。-->
+            <!--これからドメインを取得し、HTTPS通信実装後に使用できるようにします。-->
+            <!--<%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-primary me-2 px-4 btn-sm" %>-->
             <input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">
             <%= button_tag "検索", type: 'button', onclick: "codeAddress()", class: "btn btn-secondary px-4 btn-sm" %>
           </div>
