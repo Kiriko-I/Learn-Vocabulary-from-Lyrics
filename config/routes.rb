@@ -35,7 +35,6 @@ Rails.application.routes.draw do
     post 'relationships/:id' => 'relationships#create', as: 'create_relationship'
     delete 'relationships/:id' => 'relationships#destroy', as: 'destroy_relationship'
     get 'followings/:id' => 'relationships#followings', as: 'followings'
-    get 'followers/:id' => 'relationships#followers', as: 'followers'
     resources :posts do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
