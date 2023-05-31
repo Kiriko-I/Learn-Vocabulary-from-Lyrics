@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
@@ -13,7 +15,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
-    flash[:warning] = 'ユーザーを削除しました'
+    flash[:warning] = "ユーザーを削除しました"
     redirect_to admin_users_path
   end
 

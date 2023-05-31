@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -16,7 +18,7 @@ module SLL
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = 'Asia/Tokyo'
+    config.time_zone = "Asia/Tokyo"
     config.i18n.default_locale = :ja
     # config.eager_load_paths << Rails.root.join("extras")
   end

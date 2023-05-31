@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -35,8 +37,8 @@ class User < ApplicationRecord
 
   def get_profile_image
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/snowman.png')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
+      file_path = Rails.root.join("app/assets/images/snowman.png")
+      profile_image.attach(io: File.open(file_path), filename: "default-image.png", content_type: "image/png")
     end
     profile_image.variant(resize_to_fit: [200, 200]).processed
   end
@@ -54,14 +56,14 @@ class User < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(name: 'guestuser', nickname: 'ゲスト', email: 'guest@example.com') do |user|
+    find_or_create_by!(name: "guestuser", nickname: "ゲスト", email: "guest@example.com") do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
     end
   end
 
   def self.search_for(nickname)
-    User.where('nickname LIKE ?', "%#{nickname}%")
+    User.where("nickname LIKE ?", "%#{nickname}%")
   end
 
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
@@ -27,7 +29,7 @@ class User::PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       @posts = Post.all
-      render 'new'
+      render "new"
     end
   end
 
@@ -40,7 +42,7 @@ class User::PostsController < ApplicationController
       flash[:success] = "投稿を更新しました。"
       redirect_to post_path(@post)
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -52,16 +54,15 @@ class User::PostsController < ApplicationController
   end
 
   private
-
-  def post_params
-    params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image, :latitude, :longitude)
-  end
-
-  def ensure_correct_user
-    @post = Post.find(params[:id])
-    unless @post.user == current_user
-      redirect_to posts_path
+    def post_params
+      params.require(:post).permit(:prefecture, :city, :landmark, :sidewalk, :snow_height, :snow_state, :message, :snow_image, :latitude, :longitude)
     end
-  end
+
+    def ensure_correct_user
+      @post = Post.find(params[:id])
+      unless @post.user == current_user
+        redirect_to posts_path
+      end
+    end
   
 end

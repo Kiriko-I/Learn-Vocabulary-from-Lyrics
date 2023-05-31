@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Geocoder.configure(
   # Geocoding options
   # timeout: 3,                 # geocoding service timeout (secs)
@@ -25,6 +27,6 @@ Geocoder.configure(
   #   prefix: 'geocoder:'
   # }
 
-  api_key:  ENV['GOOGLEMAP'] ,
+  api_key:  ENV["GOOGLEMAP"] ,
   use_https: true
 )

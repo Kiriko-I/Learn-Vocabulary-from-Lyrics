@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
@@ -37,10 +39,10 @@ class Post < ApplicationRecord
 
   def self.search_for(prefecture, city)
 		# 全国を選択し市区町村名を入力している場合は、市区町村名のみで検索する。
-		if prefecture == '0'
-		  Post.where('city LIKE ?', "%#{city}%")
+		if prefecture == "0"
+		  Post.where("city LIKE ?", "%#{city}%")
 		else
-		  Post.where(['prefecture LIKE ? AND city LIKE ?', "#{prefecture}", "%#{city}%"])
+		  Post.where(["prefecture LIKE ? AND city LIKE ?", "#{prefecture}", "%#{city}%"])
 		end
   end
 
