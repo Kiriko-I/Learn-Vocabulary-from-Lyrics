@@ -60,9 +60,7 @@
         <span id="map-form">
           <label for="map" class="form-label">位置情報</label>
           <div class="input-group mt-1">
-            <!--HTTP通信ではAPIで現在地を取得できないため、ボタンを非表示としています。-->
-            <!--今後ドメインを取得しHTTPS通信実装後に使用できるようにします。-->
-            <!--<%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-primary me-2 px-4 btn-sm" %>-->
+            <%= button_tag "現在位置取得", id: "btn", type: 'button', onclick: "codeAddress()", class: "btn btn-primary me-2 px-4 btn-sm" %>
             <input id="address" type="textbox" placeholder="地名や建物の名前など" class="form-control">
             <%= button_tag "検索", type: 'button', onclick: "codeAddress()", class: "btn btn-secondary px-4 btn-sm" %>
           </div>
@@ -133,29 +131,29 @@
       clickMap(e.latLng, map);
     });
   }
-  // // 現在位置取得ボタンを押した時の処理
-  // document.getElementById("btn").onclick = function(){
-  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  // };
-  // // 取得に成功した場合の処理
-  // function successCallback(position){
-  //   lat = position.coords.latitude;
-  //   lng = position.coords.longitude;
-  //   document.getElementById("post_latitude").value = lat;
-  //   document.getElementById("post_longitude").value = lng;
-  //   map.setCenter(
-  //     new google.maps.LatLng(lat, lng)
-  //   );
-  //   marker.setMap(null);
-  //   marker = new google.maps.Marker({
-  //     map: map,
-  //     position: new google.maps.LatLng(lat, lng)
-  //   });
-  // };
-  // // 取得に失敗した場合の処理
-  // function errorCallback(error){
-  //     alert("位置情報が取得できませんでした");
-  // };
+  // 現在位置取得ボタンを押した時の処理
+  document.getElementById("btn").onclick = function(){
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  };
+  // 取得に成功した場合の処理
+  function successCallback(position){
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+    document.getElementById("post_latitude").value = lat;
+    document.getElementById("post_longitude").value = lng;
+    map.setCenter(
+      new google.maps.LatLng(lat, lng)
+    );
+    marker.setMap(null);
+    marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(lat, lng)
+    });
+  };
+  // 取得に失敗した場合の処理
+  function errorCallback(error){
+      alert("位置情報が取得できませんでした");
+  };
   // 検索窓で検索した場合の処理
   function codeAddress(){
     const inputAddress = document.getElementById('address').value;
