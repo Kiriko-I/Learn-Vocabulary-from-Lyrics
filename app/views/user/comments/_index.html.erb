@@ -10,12 +10,12 @@
             <td>
               <% if admin_signed_in? && comment.user.id != 1 %>
                 <%= link_to admin_user_path(comment.user.id), class: "text-decoration-none text-secondary h6" do %>
-                  <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+                  <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %></br>
                   <%= comment.user.nickname %>
                 <% end %>
               <% elsif user_signed_in? %>
                 <%= link_to show_user_path(comment.user.id), class: "text-decoration-none text-secondary h6" do %>
-                  <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %>
+                  <%= image_tag comment.user.get_profile_image, size:'50x50', class: "rounded-circle" %></br>
                   <%= comment.user.nickname %>
                 <% end %>
               <% end %>
@@ -23,9 +23,9 @@
             <td><%= comment.comment %></td>
             <td>
               <% if comment.user == current_user %>
-                <%= link_to "コメント削除", post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-4 btn-sm pull-right", remote: false %>
+                <%= link_to "コメント削除", post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-2 btn-sm pull-right", remote: false %>
               <% elsif admin_signed_in? %>
-                <%= link_to "コメント削除", admin_post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-4 btn-sm pull-right", remote: false %>
+                <%= link_to "コメント削除", admin_post_comment_path(post, comment), method: :delete, class: "btn btn-outline-danger px-2 btn-sm pull-right", remote: false %>
               <% end %>
             </td>
           </tr>

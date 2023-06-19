@@ -16,7 +16,7 @@
       </div>
       <div class="card-body">
         <div class="row g-0">
-          <div class="col-lg-7">
+          <div class="col-lg-6 p-3">
             <h5 class="card-title"><%= User.prefecture_methods.keys[post.prefecture] %> <%= post.city %></h5>
             <p class="card-text">
               <% if post.landmark.present? %>
@@ -49,21 +49,23 @@
               <% end %>
             </div>
           </div>
-          <div class="col-lg-5">
-            <% if post.snow_image.present? %>
-              投稿場所のようす
-              <%= image_tag post.snow_image, class: "card-img" %>
-            <% else %>
-              <p class="text-secondary mt-1">写真はありません</p>
-            <% end %>
+          <div class="col-lg-6 p-3">
             <% if post.latitude.present? %>
-              投稿場所
+              <i class="fa-solid fa-location-dot"></i> 投稿場所
               <div id="map"></div>
             <% else %>
               <p class="text-secondary mt-1">位置情報はありません</p>
             <% end %>
           </div>
-          <div class="col">
+          <div class="col-lg-6 p-3">
+            <% if post.snow_image.present? %>
+              <i class="fa-solid fa-image"></i> 投稿場所のようす
+              <%= image_tag post.snow_image, class: "card-img" %>
+            <% else %>
+              <p class="text-secondary mt-1">写真はありません</p>
+            <% end %>
+          </div>
+          <div class="col-lg-6 p-3">
             <%= render 'user/comments/index', post: post %>
             <% if user_signed_in? %>
               <%= render 'user/comments/form', post: post, comment: comment %>
