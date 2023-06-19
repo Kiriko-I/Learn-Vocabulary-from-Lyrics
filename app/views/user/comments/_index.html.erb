@@ -1,10 +1,10 @@
 <div class="col-11">
   <table class="table">
-    <thead>
-      <i class="fa-solid fa-comment"></i> <%= post.comments.count %> コメント
-    </thead>
-    <tbody>
-      <% if post.comments.present? %>
+    <% if post.comments.present? %>
+      <thead>
+        <i class="fa-solid fa-comment"></i> <%= post.comments.count %> コメント
+      </thead>
+      <tbody>
         <% post.comments.each do |comment| %>
           <tr>
             <td>
