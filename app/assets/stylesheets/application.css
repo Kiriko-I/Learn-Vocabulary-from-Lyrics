@@ -18,9 +18,16 @@ label {
   background-color: white;
 }
 
-/*トップページ（ログインページの背景デザイン）*/
+/*トップページ（ログインページ）の背景デザイン*/
 .top {
   height: 650px;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/*トップページ下部説明部分の背景デザイン*/
+.about {
+  height: 1200px;
   display: flex;
   background-color: rgba(255, 255, 255, 0.4);
 }

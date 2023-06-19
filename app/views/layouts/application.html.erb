@@ -22,7 +22,7 @@
       <nav class="navbar navbar-expand-xl navbar-light bg-light p-3">
         <div class="container">
           <%= link_to (admin_signed_in? ? admin_root_path : new_user_session_path ), class: "navbar-brand" do %>
-            <%= image_tag 'yukiguni.png', size: '248x54' %>
+            <%= image_tag 'yukiguni.png', width: '220' %>
           <% end %>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -80,7 +80,7 @@
       </nav>
     </header>
 
-    <div style="padding-bottom: 20px">
+    <div style="padding-bottom: 20px" class="my-3">
       <%= yield %>
     </div>
 
