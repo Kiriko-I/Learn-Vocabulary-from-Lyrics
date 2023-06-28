@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_one_attached :snow_image
+  validate :validate_no_spaces_or_line_breaks
   validates :message, length: { maximum: 70 }
 
   enum sidewalk_method: {
@@ -30,6 +31,14 @@ class Post < ApplicationRecord
     "つるつる滑りやすい　": 4,
     "溶けてぐちゃぐちゃ　": 5
   }, _prefix: true
+
+  def validate_no_spaces_or_line_breaks
+    unless  message.empty?
+      if message.strip.blank? 
+        errors.add("空白のみ、改行のみのメッセージは保存できません")
+      end
+    end
+  end
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
