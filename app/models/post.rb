@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_one_attached :snow_image
+  validates :prefecture, exclusion: { in: [0],
+    message: "は「全国」以外を選択してください" }
   validate :validate_no_spaces_or_line_breaks
   validates :message, length: { maximum: 70 }
 
@@ -34,7 +36,7 @@ class Post < ApplicationRecord
 
   def validate_no_spaces_or_line_breaks
     unless  message.empty?
-      if message.strip.blank? 
+      if message.strip.blank?
         errors.add("空白のみ、改行のみのメッセージは保存できません")
       end
     end
